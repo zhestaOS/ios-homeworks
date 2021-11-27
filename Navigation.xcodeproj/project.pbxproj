@@ -13,6 +13,8 @@
 		E6E8EB8827529309009C49C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6E8EB8627529309009C49C7 /* Main.storyboard */; };
 		E6E8EB8A2752930C009C49C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6E8EB892752930C009C49C7 /* Assets.xcassets */; };
 		E6E8EB8D2752930C009C49C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6E8EB8B2752930C009C49C7 /* LaunchScreen.storyboard */; };
+		E6E8EB9727529FDF009C49C7 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6E8EB9627529FDF009C49C7 /* ProfileView.xib */; };
+		E6E8EB9B2752A8E8009C49C7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E8EB9A2752A8E8009C49C7 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		E6E8EB892752930C009C49C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6E8EB8C2752930C009C49C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E6E8EB8E2752930C009C49C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6E8EB9627529FDF009C49C7 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
+		E6E8EB9A2752A8E8009C49C7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				E6E8EB892752930C009C49C7 /* Assets.xcassets */,
 				E6E8EB8B2752930C009C49C7 /* LaunchScreen.storyboard */,
 				E6E8EB8E2752930C009C49C7 /* Info.plist */,
+				E6E8EB9627529FDF009C49C7 /* ProfileView.xib */,
+				E6E8EB9A2752A8E8009C49C7 /* ProfileView.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -125,6 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6E8EB9727529FDF009C49C7 /* ProfileView.xib in Resources */,
 				E6E8EB8D2752930C009C49C7 /* LaunchScreen.storyboard in Resources */,
 				E6E8EB8A2752930C009C49C7 /* Assets.xcassets in Resources */,
 				E6E8EB8827529309009C49C7 /* Main.storyboard in Resources */,
@@ -138,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6E8EB9B2752A8E8009C49C7 /* ProfileView.swift in Sources */,
 				E6E8EB8527529309009C49C7 /* ViewController.swift in Sources */,
 				E6E8EB8127529309009C49C7 /* AppDelegate.swift in Sources */,
 				E6E8EB8327529309009C49C7 /* SceneDelegate.swift in Sources */,
