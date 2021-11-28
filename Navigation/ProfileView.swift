@@ -14,12 +14,12 @@ class ProfileView: UIView {
     @IBOutlet weak var dateOfBirth: UILabel!
     @IBOutlet weak var cityOfBirth: UILabel!
     @IBOutlet weak var userDescription: UITextView!
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        let xibView = Bundle.main.loadNibNamed("ProfileView", owner: self, options: nil)!.first as! UIView
+        xibView.frame = self.bounds
+        xibView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.addSubview(xibView)
     }
-    */
-
 }
