@@ -21,7 +21,7 @@ class FeedViewController: UIViewController {
         
         let buttonFrame = CGRect(x: x, y: y, width: buttonWidth, height: buttonHeight)
         let transitionButton = UIButton(frame: buttonFrame)
-        transitionButton.backgroundColor = .systemTeal
+        transitionButton.backgroundColor = .systemBlue
         transitionButton.setTitle("Открыть пост", for: .normal)
         transitionButton.setTitleColor(.white, for: .normal)
         transitionButton.addTarget(self, action: #selector(transitionButtonTapped), for: .touchUpInside)
