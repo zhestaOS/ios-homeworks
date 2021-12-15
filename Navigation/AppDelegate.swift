@@ -21,15 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let feedVC = FeedViewController()
         let feedNC = UINavigationController(rootViewController: feedVC)
         
-        let storyboard = UIStoryboard.init(name: "Profile", bundle: nil)
-        let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
+        let profileVC = ProfileViewController()
         let profileNC = UINavigationController(rootViewController: profileVC)
+        profileNC.view.backgroundColor = .white
         
-        feedVC.tabBarItem.image = UIImage(systemName: "house.circle")
-        profileVC.tabBarItem.image = UIImage(systemName: "person.crop.circle")
+        feedVC.tabBarItem.image = UIImage(systemName: "house.fill")
+        feedVC.tabBarItem.title = "Feed"
+        profileVC.tabBarItem.image = UIImage(systemName: "person.fill")
+        profileVC.tabBarItem.title = "Profile"
         
         tabBarController.viewControllers = [feedNC, profileNC]
-        
+        tabBarController.tabBar.backgroundColor = .white
         
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
