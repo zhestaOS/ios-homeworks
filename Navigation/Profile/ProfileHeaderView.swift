@@ -9,96 +9,120 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    let profileImageView: UIImageView
-    let profileNameLabel: UILabel
-    let profileStatusLabel: UILabel
-    let showStatusButton: UIButton
+    private var statusText: String?
     
-    override init(frame: CGRect) {
-        
-        self.profileImageView = UIImageView(
-            frame: CGRect(
-                x: 16,
-                y: 16,
-                width: 100,
-                height: 100
-            )
-        )
-        
-        self.profileNameLabel = UILabel(
-            frame: CGRect(
-                x: profileImageView.frame.origin.x + profileImageView.frame.width + 16,
-                y: 27,
-                width: 200,
-                height: 20
-            )
-        )
-        
-        self.profileStatusLabel = UILabel(
-            frame: CGRect(
-                x: profileImageView.frame.origin.x + profileImageView.frame.width + 16,
-                y: 80,
-                width: 200,
-                height: 20
-            )
-        )
-        
-        showStatusButton = UIButton(
-            frame: CGRect(
-                x: 16,
-                y: profileImageView.frame.height + 32,
-                width: UIScreen.main.bounds.size.width - 32,
-                height: 50
-            )
-        )
-        
-        super.init(frame: frame)
-        
-        showStatusButton.addTarget(self, action: #selector(showStatusButtonTapped), for: .touchUpInside)
-        
-        addSubview(profileImageView)
-        addSubview(profileNameLabel)
-        addSubview(profileStatusLabel)
-        addSubview(showStatusButton)
-        
+    private lazy var profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 50
+        imageView.layer.borderWidth = 3
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.image = UIImage(named: "hipsterCat")
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private lazy var profileNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Hipster Cat"
+        label.textColor = .black
+        label.font = UIFont(name: "AvenirNext-Bold", size: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var profileStatusLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Waiting for something..."
+        label.textColor = .gray
+        label.font = UIFont(name: "Avenir Next", size: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var profileStatusTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .white
+        textField.textColor = .black
+        textField.font = UIFont(name: "Avenir Next", size: 15)
+        textField.layer.cornerRadius = 14
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderWidth = 1
+        let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 14, height: 0))
+        textField.leftView = leftView
+        textField.leftViewMode = .always
+        textField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    private lazy var setStatusButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Set status", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.titleLabel?.textColor = .white
+        button.layer.cornerRadius = 14
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowRadius = 4
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.7
+        button.addTarget(self, action: #selector(setStatusButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    init() {
+        super.init(frame: .zero)
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(frame: .zero)
+        setupUI()
     }
     
-    override func layoutSubviews() {
+    private func setupUI() {
+        addSubview(profileImageView)
+        addSubview(profileNameLabel)
+        addSubview(profileStatusLabel)
+        addSubview(setStatusButton)
+        addSubview(profileStatusTextField)
         
-        profileImageView.layer.cornerRadius = 50
-        profileImageView.layer.borderWidth = 3
-        profileImageView.layer.borderColor = UIColor.white.cgColor
-        profileImageView.image = UIImage(named: "hipsterCat")
-        profileImageView.layer.masksToBounds = true
-        profileImageView.contentMode = .scaleAspectFill
-        
-        profileNameLabel.text = "Hipster Cat"
-        profileNameLabel.textColor = .black
-        profileNameLabel.font = UIFont(name: "AvenirNext-Bold", size: 18)
-
-        profileStatusLabel.text = "Waiting for something..."
-        profileStatusLabel.textColor = .gray
-        profileStatusLabel.font = UIFont(name: "Avenir Next", size: 14)
-
-        showStatusButton.setTitle("Show status", for: .normal)
-        showStatusButton.backgroundColor = .systemBlue
-        showStatusButton.titleLabel?.textColor = .white
-        showStatusButton.layer.cornerRadius = 14
-        showStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
-        showStatusButton.layer.shadowRadius = 4
-        showStatusButton.layer.shadowColor = UIColor.black.cgColor
-        showStatusButton.layer.shadowOpacity = 0.7
-        
+        NSLayoutConstraint.activate([
+            profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            profileImageView.widthAnchor.constraint(equalToConstant: 100),
+            profileImageView.heightAnchor.constraint(equalToConstant: 100),
+            
+            profileNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
+            profileNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
+            profileNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            profileStatusLabel.topAnchor.constraint(equalTo: profileNameLabel.bottomAnchor, constant: 20),
+            profileStatusLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
+            profileStatusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            setStatusButton.topAnchor.constraint(equalTo: profileStatusTextField.bottomAnchor, constant: 16),
+            setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            profileStatusTextField.topAnchor.constraint(equalTo: profileStatusLabel.bottomAnchor, constant: 8),
+            profileStatusTextField.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
+            profileStatusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            profileStatusTextField.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
     
     @objc
-    func showStatusButtonTapped() {
-        guard let text = profileStatusLabel.text else { return }
-        print(text)
+    func setStatusButtonTapped() {
+        profileStatusLabel.text = statusText
+    }
+    
+    @objc
+    func statusTextChanged(_ textField: UITextField) {
+        statusText = textField.text
     }
     
 }
