@@ -62,7 +62,7 @@ class FeedViewController: UIViewController {
             firstButton,
             secondButton
         )
-        
+
         stackView.addArrangedSubview(firstButton)
         stackView.addArrangedSubview(secondButton)
         
