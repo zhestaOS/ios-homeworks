@@ -9,13 +9,14 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private lazy var profileHeader: ProfileHeaderView = {
+    private let profileHeader: ProfileHeaderView = {
         let view = ProfileHeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        
         return view
     }()
     
-    private lazy var bottomButton: UIButton = {
+    private let bottomButton: UIButton = {
         let button = UIButton()
         button.setTitle("Tap me", for: .normal)
         button.backgroundColor = .systemGreen
@@ -25,6 +26,7 @@ class ProfileViewController: UIViewController {
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
 
@@ -33,8 +35,10 @@ class ProfileViewController: UIViewController {
         
         view.backgroundColor = .lightGray
         
-        view.addSubview(profileHeader)
-        view.addSubview(bottomButton)
+        view.addSubviews(
+            profileHeader,
+            bottomButton
+        )
         
         NSLayoutConstraint.activate([
             profileHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

@@ -11,7 +11,7 @@ class ProfileHeaderView: UIView {
     
     private var statusText: String?
     
-    private lazy var profileImageView: UIImageView = {
+    private let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 50
         imageView.layer.borderWidth = 3
@@ -20,28 +20,31 @@ class ProfileHeaderView: UIView {
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         return imageView
     }()
     
-    private lazy var profileNameLabel: UILabel = {
+    private let profileNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Hipster Cat"
         label.textColor = .black
         label.font = UIFont(name: "AvenirNext-Bold", size: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
-    private lazy var profileStatusLabel: UILabel = {
+    private let profileStatusLabel: UILabel = {
         let label = UILabel()
         label.text = "Waiting for something..."
         label.textColor = .gray
         label.font = UIFont(name: "Avenir Next", size: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
-    private lazy var profileStatusTextField: UITextField = {
+    private let profileStatusTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.textColor = .black
@@ -54,10 +57,11 @@ class ProfileHeaderView: UIView {
         textField.leftViewMode = .always
         textField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
         textField.translatesAutoresizingMaskIntoConstraints = false
+        
         return textField
     }()
     
-    private lazy var setStatusButton: UIButton = {
+    private let setStatusButton: UIButton = {
         let button = UIButton()
         button.setTitle("Set status", for: .normal)
         button.backgroundColor = .systemBlue
@@ -69,6 +73,7 @@ class ProfileHeaderView: UIView {
         button.layer.shadowOpacity = 0.7
         button.addTarget(self, action: #selector(setStatusButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
     
@@ -83,11 +88,13 @@ class ProfileHeaderView: UIView {
     }
     
     private func setupUI() {
-        addSubview(profileImageView)
-        addSubview(profileNameLabel)
-        addSubview(profileStatusLabel)
-        addSubview(setStatusButton)
-        addSubview(profileStatusTextField)
+        addSubviews(
+            profileImageView,
+            profileNameLabel,
+            profileStatusLabel,
+            setStatusButton,
+            profileStatusTextField
+        )
         
         NSLayoutConstraint.activate([
             profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),

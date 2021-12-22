@@ -11,16 +11,17 @@ class FeedViewController: UIViewController {
     
     let post = Post(title: "Post")
     
-    private lazy var stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
         return stackView
     }()
     
-    private lazy var firstButton: UIButton = {
+    private let firstButton: UIButton = {
         let button = UIButton()
         button.setTitle("First button", for: .normal)
         button.backgroundColor = .systemGreen
@@ -32,10 +33,11 @@ class FeedViewController: UIViewController {
         button.layer.shadowOpacity = 0.7
         button.addTarget(self, action: #selector(transitionButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
     
-    private lazy var secondButton: UIButton = {
+    private let secondButton: UIButton = {
         let button = UIButton()
         button.setTitle("Second button", for: .normal)
         button.backgroundColor = .systemTeal
@@ -47,6 +49,7 @@ class FeedViewController: UIViewController {
         button.layer.shadowOpacity = 0.7
         button.addTarget(self, action: #selector(transitionButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         return button
     }()
 
@@ -54,9 +57,11 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        view.addSubview(stackView)
-        view.addSubview(firstButton)
-        view.addSubview(secondButton)
+        view.addSubviews(
+            stackView,
+            firstButton,
+            secondButton
+        )
         
         stackView.addArrangedSubview(firstButton)
         stackView.addArrangedSubview(secondButton)
