@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let profileVC = ProfileViewController()
         let profileNC = UINavigationController(rootViewController: profileVC)
+        profileNC.view.backgroundColor = .white
         
         feedVC.tabBarItem.image = UIImage(systemName: "house.fill")
         feedVC.tabBarItem.title = "Feed"
@@ -30,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         profileVC.tabBarItem.title = "Profile"
         
         tabBarController.viewControllers = [feedNC, profileNC]
+
+        tabBarController.tabBar.backgroundColor = .white
         
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
