@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         profileVC.tabBarItem.title = "Profile"
         
         tabBarController.viewControllers = [feedNC, profileNC]
+
         tabBarController.tabBar.backgroundColor = .white
         
         window?.rootViewController = tabBarController
