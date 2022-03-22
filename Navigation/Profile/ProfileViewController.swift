@@ -11,7 +11,7 @@ class ProfileViewController: UIViewController {
     
     private let profileHeader: ProfileHeaderView = {
         let view = ProfileHeaderView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.toAutoLayout()
         
         return view
     }()
@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
         button.layer.shadowRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         
         return button
     }()
@@ -34,12 +34,23 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .lightGray
+        title = "Profile"
         
+        navigationController?.navigationBar.isTranslucent = false
+        
+        addSubviews()
+        setConstraints()
+     
+    }
+    
+    private func addSubviews() {
         view.addSubviews(
             profileHeader,
             bottomButton
         )
-        
+    }
+    
+    private func setConstraints() {
         NSLayoutConstraint.activate([
             profileHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             profileHeader.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -51,10 +62,6 @@ class ProfileViewController: UIViewController {
             bottomButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             bottomButton.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
-        title = "Profile"
-        
-        navigationController?.navigationBar.isTranslucent = false
-     
     }
+    
 }

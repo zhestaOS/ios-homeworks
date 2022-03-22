@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let feedVC = FeedViewController()
         let feedNC = UINavigationController(rootViewController: feedVC)
         
-        let profileVC = ProfileViewController()
+        let profileVC = LogInViewController()
         let profileNC = UINavigationController(rootViewController: profileVC)
         profileNC.view.backgroundColor = .white
         

@@ -16,7 +16,7 @@ class FeedViewController: UIViewController {
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.toAutoLayout()
         
         return stackView
     }()
@@ -32,7 +32,7 @@ class FeedViewController: UIViewController {
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
         button.addTarget(self, action: #selector(transitionButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         
         return button
     }()
@@ -48,7 +48,7 @@ class FeedViewController: UIViewController {
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
         button.addTarget(self, action: #selector(transitionButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         
         return button
     }()
@@ -56,7 +56,11 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        addSubviews()
+        setConstraints()
+    }
+    
+    private func addSubviews() {
         view.addSubviews(
             stackView,
             firstButton,
@@ -65,7 +69,9 @@ class FeedViewController: UIViewController {
 
         stackView.addArrangedSubview(firstButton)
         stackView.addArrangedSubview(secondButton)
-        
+    }
+    
+    private func setConstraints() {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
             
@@ -84,5 +90,6 @@ class FeedViewController: UIViewController {
         let vc = PostViewController()
         vc.post = self.post
         navigationController?.pushViewController(vc, animated: true)
-    } 
+    }
+    
 }
