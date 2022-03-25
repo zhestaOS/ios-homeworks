@@ -10,7 +10,8 @@
 		E623F5B227C533CA008E1943 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E623F5B127C533CA008E1943 /* UIImage+Extension.swift */; };
 		E6416FA327737DDC0033E6E9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6416FA227737DDC0033E6E9 /* UIView+Extension.swift */; };
 		E6416FA527738AF80033E6E9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6416FA427738AF80033E6E9 /* ProfileViewController.swift */; };
-		E6898628276783CC00D5A31C /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6898627276783CC00D5A31C /* ProfileHeaderView.swift */; };
+		E67A335227EA4D30004A07EB /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67A335127EA4D30004A07EB /* PostTableViewCell.swift */; };
+		E6898628276783CC00D5A31C /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6898627276783CC00D5A31C /* ProfileTableHeaderView.swift */; };
 		E6BCB91927A8619400FA8863 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BCB91827A8619400FA8863 /* LogInViewController.swift */; };
 		E6E8EB8127529309009C49C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E8EB8027529309009C49C7 /* AppDelegate.swift */; };
 		E6E8EB8A2752930C009C49C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6E8EB892752930C009C49C7 /* Assets.xcassets */; };
@@ -25,7 +26,8 @@
 		E623F5B127C533CA008E1943 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		E6416FA227737DDC0033E6E9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		E6416FA427738AF80033E6E9 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		E6898627276783CC00D5A31C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		E67A335127EA4D30004A07EB /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		E6898627276783CC00D5A31C /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		E6BCB91827A8619400FA8863 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		E6E8EB7D27529309009C49C7 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E8EB8027529309009C49C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,9 +53,11 @@
 		E68986262767838400D5A31C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				E6898627276783CC00D5A31C /* ProfileHeaderView.swift */,
-				E6416FA427738AF80033E6E9 /* ProfileViewController.swift */,
 				E6BCB91827A8619400FA8863 /* LogInViewController.swift */,
+				E6416FA427738AF80033E6E9 /* ProfileViewController.swift */,
+				E6898627276783CC00D5A31C /* ProfileTableHeaderView.swift */,
+				E67A335127EA4D30004A07EB /* PostTableViewCell.swift */,
+				E6E8EBB627592EDB009C49C7 /* Post.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -82,7 +86,6 @@
 				E6E8EBB22757D8BB009C49C7 /* FeedViewController.swift */,
 				E6E8EBB42757E28A009C49C7 /* PostViewController.swift */,
 				E6E8EBB8275938A1009C49C7 /* InfoViewController.swift */,
-				E6E8EBB627592EDB009C49C7 /* Post.swift */,
 				E6416FA227737DDC0033E6E9 /* UIView+Extension.swift */,
 				E623F5B127C533CA008E1943 /* UIImage+Extension.swift */,
 				E6E8EB8E2752930C009C49C7 /* Info.plist */,
@@ -161,6 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E67A335227EA4D30004A07EB /* PostTableViewCell.swift in Sources */,
 				E6E8EB8127529309009C49C7 /* AppDelegate.swift in Sources */,
 				E6E8EBB32757D8BB009C49C7 /* FeedViewController.swift in Sources */,
 				E6BCB91927A8619400FA8863 /* LogInViewController.swift in Sources */,
@@ -170,7 +174,7 @@
 				E6416FA527738AF80033E6E9 /* ProfileViewController.swift in Sources */,
 				E623F5B227C533CA008E1943 /* UIImage+Extension.swift in Sources */,
 				E6E8EBB52757E28A009C49C7 /* PostViewController.swift in Sources */,
-				E6898628276783CC00D5A31C /* ProfileHeaderView.swift in Sources */,
+				E6898628276783CC00D5A31C /* ProfileTableHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

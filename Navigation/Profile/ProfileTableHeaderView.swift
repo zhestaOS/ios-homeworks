@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileTableHeaderView: UIView {
     
     private var statusText: String?
     
@@ -79,12 +79,16 @@ class ProfileHeaderView: UIView {
     
     init() {
         super.init(frame: .zero)
+        
+        backgroundColor = .systemGray6
         addSubviews()
         setConstraints()
     }
     
     required init?(coder: NSCoder) {
         super.init(frame: .zero)
+        
+        backgroundColor = .systemGray6
         addSubviews()
         setConstraints()
     }

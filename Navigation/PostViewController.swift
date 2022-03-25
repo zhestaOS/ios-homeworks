@@ -15,7 +15,6 @@ class PostViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemTeal
-        title = post?.title
         
         let infoBarButton = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(infoBarButtonTapped))
         navigationItem.rightBarButtonItem = infoBarButton
