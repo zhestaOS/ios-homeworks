@@ -1,0 +1,67 @@
+//
+//  ProfileViewController.swift
+//  Navigation
+//
+//  Created by Евгения Статива on 28.11.2021.
+//
+
+import UIKit
+
+class ProfileViewController: UIViewController {
+    
+    private let profileHeader: ProfileHeaderView = {
+        let view = ProfileHeaderView()
+        view.toAutoLayout()
+        
+        return view
+    }()
+    
+    private let bottomButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Tap me", for: .normal)
+        button.backgroundColor = .systemGreen
+        button.titleLabel?.textColor = .white
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowRadius = 4
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.7
+        button.toAutoLayout()
+        
+        return button
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .lightGray
+        title = "Profile"
+        
+        navigationController?.navigationBar.isTranslucent = false
+        
+        addSubviews()
+        setConstraints()
+     
+    }
+    
+    private func addSubviews() {
+        view.addSubviews(
+            profileHeader,
+            bottomButton
+        )
+    }
+    
+    private func setConstraints() {
+        NSLayoutConstraint.activate([
+            profileHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileHeader.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            profileHeader.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            profileHeader.heightAnchor.constraint(equalToConstant: 220),
+            
+            bottomButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+}
