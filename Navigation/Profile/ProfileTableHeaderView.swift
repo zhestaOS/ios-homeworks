@@ -7,7 +7,11 @@
 
 import UIKit
 
-class ProfileTableHeaderView: UIView {
+final class ProfileTableHeaderView: UIView {
+    
+    private enum Constants {
+        static let spacing: CGFloat = 16
+    }
     
     private var statusText: String?
     
@@ -77,20 +81,15 @@ class ProfileTableHeaderView: UIView {
         return button
     }()
     
-    init() {
+    override init(frame: CGRect) {
         super.init(frame: .zero)
-        
-        backgroundColor = .systemGray6
         addSubviews()
         setConstraints()
+        backgroundColor = .systemGray6
     }
     
     required init?(coder: NSCoder) {
-        super.init(frame: .zero)
-        
-        backgroundColor = .systemGray6
-        addSubviews()
-        setConstraints()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func addSubviews() {
@@ -105,28 +104,29 @@ class ProfileTableHeaderView: UIView {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.spacing),
+            profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.spacing),
             profileImageView.widthAnchor.constraint(equalToConstant: 100),
             profileImageView.heightAnchor.constraint(equalToConstant: 100),
             
             profileNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
-            profileNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
-            profileNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            profileNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: Constants.spacing),
+            profileNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.spacing),
             
             profileStatusLabel.topAnchor.constraint(equalTo: profileNameLabel.bottomAnchor, constant: 20),
-            profileStatusLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
-            profileStatusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            
-            setStatusButton.topAnchor.constraint(equalTo: profileStatusTextField.bottomAnchor, constant: 16),
-            setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            profileStatusLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: Constants.spacing),
+            profileStatusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.spacing),
             
             profileStatusTextField.topAnchor.constraint(equalTo: profileStatusLabel.bottomAnchor, constant: 8),
-            profileStatusTextField.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
-            profileStatusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            profileStatusTextField.heightAnchor.constraint(equalToConstant: 40)
+            profileStatusTextField.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: Constants.spacing),
+            profileStatusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.spacing),
+            profileStatusTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            setStatusButton.topAnchor.constraint(equalTo: profileStatusTextField.bottomAnchor, constant: Constants.spacing),
+            setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.spacing),
+            setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.spacing),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.spacing)
         ])
     }
     

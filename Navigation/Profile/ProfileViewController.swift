@@ -7,71 +7,56 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
+    
+    private var posts = [Post]()
+    
+    private let contentGenerator = ContentGenerator()
+    
+    private let header = ProfileTableHeaderView()
     
     private let tableView: UITableView = {
-        let view = UITableView()
-        view.toAutoLayout()
+        let table = UITableView()
+        table.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
+        table.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
+        table.toAutoLayout()
         
-        return view
+        return table
     }()
-        
-    private var postArray: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        navigationController?.navigationBar.isTranslucent = false
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
-        
-//        tableView.tableHeaderView = ProfileTableHeaderView()
-        tableView.tableFooterView = UIView()
-        
-        let post1 = Post(
-            author: "lingva.ru",
-            image: "mountains",
-            description: "Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана.",
-            likes: 243,
-            views: 365
-        )
-        let post2 = Post(
-            author: "Иоганн Вольфганг Гёте",
-            image: "goethe",
-            description: "Душа моя озарена неземной радостью, как эти чудесные весенние утра, которыми я наслаждаюсь от всего сердца. Я совсем один и блаженствую в здешнем краю, словно созданном для таких, как я.",
-            likes: 276,
-            views: 470
-        )
-        let post3 = Post(
-            author: "Франц Кафка",
-            image: "kafka",
-            description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое.",
-            likes: 132,
-            views: 265
-        )
-        let post4 = Post(
-            author: "Александр Дюма",
-            image: "dumas",
-            description: "Посмотрите, — сказал аббат, — на солнечный луч, проникающий в мое окно, и на эти линии, вычерченные мною на стене. По этим линиям я определяю время вернее, чем если бы у меня были часы, потому что часы могут испортиться, а солнце и земля всегда работают исправно.",
-            likes: 344,
-            views: 368
-        )
-        
-        postArray = [post1, post2, post3, post4]
-        tableView.reloadData()
-    
         addSubviews()
+        setupViews()
         setConstraints()
+                
+        posts = contentGenerator.posts()
+        
+        tableView.reloadData()
      
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     private func addSubviews() {
-        view.addSubviews(
-            tableView
-        )
+        view.addSubview(tableView)
+    }
+    
+    private func setupViews() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.tableHeaderView = header
+        header.setNeedsLayout()
+        header.layoutIfNeeded()
+        header.frame.size = header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        
+        tableView.tableFooterView = UIView()
     }
     
     private func setConstraints() {
@@ -87,31 +72,30 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postArray.count
+        return section == 0 ? 1 : posts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath)
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PhotosTableViewCell", for: indexPath)
+            return cell
+        }
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath)
+
         if let cell = cell as? PostTableViewCell {
-            cell.update(with: postArray[indexPath.row])
+            cell.update(with: posts[indexPath.row])
         }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        570
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return ProfileTableHeaderView()
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 220
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = PhotosViewController()
+        nextVC.update(title: "Photo Gallery")
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }

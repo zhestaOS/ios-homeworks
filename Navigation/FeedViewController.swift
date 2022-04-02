@@ -7,10 +7,8 @@
 
 import UIKit
 
-class FeedViewController: UIViewController {
-    
-//    let post = Post(title: "Post")
-    
+final class FeedViewController: UIViewController {
+        
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -88,7 +86,6 @@ class FeedViewController: UIViewController {
     @objc
     func transitionButtonTapped() {
         let vc = PostViewController()
-//        vc.post = self.post
         navigationController?.pushViewController(vc, animated: true)
     }
     

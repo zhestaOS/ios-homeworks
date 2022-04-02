@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InfoViewController: UIViewController {
+final class InfoViewController: UIViewController {
     
     let buttonWidth: CGFloat = 200
     let buttonHeight: CGFloat = 44

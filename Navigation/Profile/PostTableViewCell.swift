@@ -7,7 +7,12 @@
 
 import UIKit
 
-class PostTableViewCell: UITableViewCell {
+final class PostTableViewCell: UITableViewCell {
+    
+    private enum Constants {
+        static let spacing: CGFloat = 16
+        static let screenWidth = UIScreen.main.bounds.width
+    }
 
     private let authorLabel: UILabel = {
         let label = UILabel()
@@ -58,18 +63,21 @@ class PostTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        addSubviews()
-        setConstraints()
+        customInit()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func customInit() {
+        selectionStyle = .none
         addSubviews()
         setConstraints()
     }
     
     private func addSubviews() {
-        addSubviews(
+        contentView.addSubviews(
             authorLabel,
             postImageView,
             descriptionLabel,
@@ -87,30 +95,28 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func setConstraints() {
-        let screenWidth = UIScreen.main.bounds.width
         
         NSLayoutConstraint.activate([
-            authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.spacing),
+            authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.spacing),
+            authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.spacing),
             
             postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 12),
             postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            postImageView.heightAnchor.constraint(equalToConstant: screenWidth),
-            postImageView.widthAnchor.constraint(equalToConstant: screenWidth),
+            postImageView.heightAnchor.constraint(equalToConstant: Constants.screenWidth),
+            postImageView.widthAnchor.constraint(equalToConstant: Constants.screenWidth),
 
-            descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 16),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: Constants.spacing),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.spacing),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.spacing),
 
-            likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            likesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 16),
+            likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constants.spacing),
+            likesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.spacing),
+            likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.spacing),
 
-            viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 16)
+            viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constants.spacing),
+            viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.spacing),
         ])
     
     }
