@@ -201,4 +201,9 @@ final class LogInViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc
+    func tapGesture(_ gesture: UITapGestureRecognizer) {
+        print("Did catch tap action")
+    }
+    
 }

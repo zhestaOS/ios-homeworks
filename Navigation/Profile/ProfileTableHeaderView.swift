@@ -23,6 +23,8 @@ final class ProfileTableHeaderView: UIView {
         imageView.image = UIImage(named: "hipsterCat")
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
+        
         imageView.toAutoLayout()
         
         return imageView
@@ -83,6 +85,11 @@ final class ProfileTableHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        
+        let recognizer = UITapGestureRecognizer()
+        recognizer.addTarget(self, action: #selector(tapGesture(_:)))
+        profileImageView.addGestureRecognizer(recognizer)
+        
         addSubviews()
         setConstraints()
         backgroundColor = .systemGray6
@@ -138,6 +145,11 @@ final class ProfileTableHeaderView: UIView {
     @objc
     func statusTextChanged(_ textField: UITextField) {
         statusText = textField.text
+    }
+    
+    @objc
+    func tapGesture(_ gesture: UITapGestureRecognizer) {
+        print("Did catch tap action")
     }
     
 }
