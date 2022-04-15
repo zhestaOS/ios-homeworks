@@ -11,9 +11,30 @@ final class ProfileTableHeaderView: UIView {
     
     private enum Constants {
         static let spacing: CGFloat = 16
+        static let closeButtonSize: CGFloat = 20
     }
     
     private var statusText: String?
+    
+    private let backView: UIView = {
+        let view = UIView()
+        view.frame = UIScreen.main.bounds
+        view.alpha = 0
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        
+        return view
+    }()
+    
+    private let closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        button.frame = CGRect(x: UIScreen.main.bounds.width - Constants.spacing - Constants.closeButtonSize, y: Constants.spacing, width: Constants.closeButtonSize, height: Constants.closeButtonSize)
+        button.alpha = 0
+        
+        return button
+    }()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -23,6 +44,7 @@ final class ProfileTableHeaderView: UIView {
         imageView.image = UIImage(named: "hipsterCat")
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
         imageView.toAutoLayout()
         
         return imageView
@@ -83,8 +105,18 @@ final class ProfileTableHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        
+        let recognizer = UITapGestureRecognizer()
+        recognizer.addTarget(self, action: #selector(tapGesture(_:)))
+        profileImageView.addGestureRecognizer(recognizer)
+        
         addSubviews()
         setConstraints()
+        
+        bringSubviewToFront(backView)
+        bringSubviewToFront(profileImageView)
+        bringSubviewToFront(closeButton)
+        
         backgroundColor = .systemGray6
     }
     
@@ -94,12 +126,14 @@ final class ProfileTableHeaderView: UIView {
     
     private func addSubviews() {
         addSubviews(
+            backView,
             profileImageView,
             profileNameLabel,
             profileStatusLabel,
             setStatusButton,
             profileStatusTextField
         )
+        backView.addSubview(closeButton)
     }
     
     private func setConstraints() {
@@ -127,6 +161,7 @@ final class ProfileTableHeaderView: UIView {
             setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.spacing),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.spacing)
+
         ])
     }
     
@@ -136,8 +171,76 @@ final class ProfileTableHeaderView: UIView {
     }
     
     @objc
+    func closeButtonTapped() {
+        hideImageViewAnimation()
+    }
+    
+    @objc
     func statusTextChanged(_ textField: UITextField) {
         statusText = textField.text
+    }
+    
+    @objc
+    func tapGesture(_ gesture: UITapGestureRecognizer) {
+        showImageViewAnimation()
+    }
+    
+    private func showImageViewAnimation() {
+        guard
+            let midX = superview?.bounds.midX,
+            let midY = superview?.bounds.midY,
+            let superWidth = superview?.bounds.width
+        else { return }
+        
+        let superviewCenter = CGPoint(x: midX, y: midY)
+        
+        UIView.animateKeyframes(
+            withDuration: 0.8,
+            delay: 0,
+            options: .calculationModeLinear,
+            animations: {
+                UIView.addKeyframe(
+                    withRelativeStartTime: 0,
+                    relativeDuration: 0.5) {
+                        self.backView.alpha = 1
+
+                        self.profileImageView.center = superviewCenter
+                        self.profileImageView.layer.bounds.size.width = superWidth
+                        self.profileImageView.layer.bounds.size.height = superWidth
+                        self.profileImageView.layer.cornerRadius = 0
+                    }
+                UIView.addKeyframe(
+                    withRelativeStartTime: 0.5,
+                    relativeDuration: 0.3) {
+                        self.closeButton.alpha = 1
+                    }
+            },
+            completion: nil)
+    }
+    
+    private func hideImageViewAnimation() {
+
+        UIView.animateKeyframes(
+            withDuration: 0.8,
+            delay: 0,
+            options: .calculationModeLinear,
+            animations: {
+                UIView.addKeyframe(
+                    withRelativeStartTime: 0,
+                    relativeDuration: 0.3) {
+                        self.closeButton.alpha = 0
+                    }
+                UIView.addKeyframe(
+                    withRelativeStartTime: 0.3,
+                    relativeDuration: 0.5) {
+                        self.backView.alpha = 0
+                        
+                        self.profileImageView.frame = CGRect(x: Constants.spacing, y: Constants.spacing, width: 100, height: 100)
+                        self.profileImageView.layer.cornerRadius = 50
+
+                    }
+            },
+            completion: nil)
     }
     
 }

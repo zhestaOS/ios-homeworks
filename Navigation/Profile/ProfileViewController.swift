@@ -26,6 +26,8 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        header.isUserInteractionEnabled = true
                 
         addSubviews()
         setupViews()
