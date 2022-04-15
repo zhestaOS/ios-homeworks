@@ -49,7 +49,7 @@ final class PhotosTableViewCell: UITableViewCell {
         imageView.layer.cornerRadius = 6
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "bear")
+        imageView.image = UIImage(named: "photo1")
         imageView.toAutoLayout()
         
         return imageView
@@ -60,7 +60,7 @@ final class PhotosTableViewCell: UITableViewCell {
         imageView.layer.cornerRadius = 6
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "bicycle")
+        imageView.image = UIImage(named: "photo2")
         imageView.toAutoLayout()
         
         return imageView
@@ -71,7 +71,7 @@ final class PhotosTableViewCell: UITableViewCell {
         imageView.layer.cornerRadius = 6
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "car")
+        imageView.image = UIImage(named: "photo3")
         imageView.toAutoLayout()
         
         return imageView
@@ -82,7 +82,7 @@ final class PhotosTableViewCell: UITableViewCell {
         imageView.layer.cornerRadius = 6
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "colors")
+        imageView.image = UIImage(named: "photo4")
         imageView.toAutoLayout()
         
         return imageView

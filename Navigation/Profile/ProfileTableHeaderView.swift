@@ -30,7 +30,12 @@ final class ProfileTableHeaderView: UIView {
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .black
         button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        button.frame = CGRect(x: UIScreen.main.bounds.width - Constants.spacing - Constants.closeButtonSize, y: Constants.spacing, width: Constants.closeButtonSize, height: Constants.closeButtonSize)
+        button.frame = CGRect(
+            x: UIScreen.main.bounds.width - Constants.spacing - Constants.closeButtonSize,
+            y: Constants.spacing,
+            width: Constants.closeButtonSize,
+            height: Constants.closeButtonSize
+        )
         button.alpha = 0
         
         return button

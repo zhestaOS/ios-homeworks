@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 final class ProfileViewController: UIViewController {
     
@@ -28,7 +29,13 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         header.isUserInteractionEnabled = true
-                
+        
+        #if DEBUG
+        header.backgroundColor = .systemOrange
+        #else
+        header.backgroundColor = .systemGreen
+        #endif
+
         addSubviews()
         setupViews()
         setConstraints()
