@@ -85,8 +85,8 @@
 		E6898627276783CC00D5A31C /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		E6BCB91827A8619400FA8863 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		E6E8EB7D27529309009C49C7 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6E8EB8027529309009C49C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6E8EB892752930C009C49C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E6E8EB8C2752930C009C49C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E6E8EB8E2752930C009C49C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6E8EBB22757D8BB009C49C7 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		E6E8EBB42757E28A009C49C7 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +160,22 @@
 				E67A335127EA4D30004A07EB /* PostTableViewCell.swift */,
 				E67A335727F49A25004A07EB /* ContentGenerator.swift */,
 			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		E66155F52809A5EE001144B7 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				E66155F62809A5EE001144B7 /* ProfileTableHeaderView.swift */,
+				E66155F72809A5EE001144B7 /* PhotosViewController.swift */,
+				E66155F82809A5EE001144B7 /* PhotosCollectionViewCell.swift */,
+				E66155F92809A5EE001144B7 /* PhotosTableViewCell.swift */,
+				E66155FA2809A5EE001144B7 /* Post.swift */,
+				E66155FB2809A5EE001144B7 /* PostTableViewCell.swift */,
+				E66155FC2809A5EE001144B7 /* LogInViewController.swift */,
+				E66155FD2809A5EE001144B7 /* ProfileViewController.swift */,
+				E66155FE2809A5EE001144B7 /* ContentGenerator.swift */,
+			);
 			path = Profile;
 			sourceTree = "<group>";
 		};
@@ -193,8 +209,9 @@
 				E6E8EBB8275938A1009C49C7 /* InfoViewController.swift */,
 				E6416FA227737DDC0033E6E9 /* UIView+Extension.swift */,
 				E623F5B127C533CA008E1943 /* UIImage+Extension.swift */,
-				E6E8EB8E2752930C009C49C7 /* Info.plist */,
 				E6E8EB892752930C009C49C7 /* Assets.xcassets */,
+				E6E8EB8B2752930C009C49C7 /* LaunchScreen.storyboard */,
+				E6E8EB8E2752930C009C49C7 /* Info.plist */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -309,7 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6E8EB8D2752930C009C49C7 /* (null) in Resources */,
+				E6E8EB8D2752930C009C49C7 /* LaunchScreen.storyboard in Resources */,
 				E6E8EB8A2752930C009C49C7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -618,7 +635,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Navigation;
@@ -635,7 +651,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -648,7 +664,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Navigation;
@@ -665,7 +680,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

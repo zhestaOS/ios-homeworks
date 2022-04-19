@@ -4,7 +4,6 @@
 //
 //  Created by Евгения Шевякова on 22.02.2022.
 //
-
 import UIKit
 
 public extension UIImage {
