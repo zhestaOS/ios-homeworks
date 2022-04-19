@@ -153,12 +153,12 @@
 			isa = PBXGroup;
 			children = (
 				E686C08F280F1A9500B4EB0D /* LogInViewController.swift */,
-				E686C08B280F1A9500B4EB0D /* PhotosCollectionViewCell.swift */,
-				E686C08C280F1A9500B4EB0D /* PhotosTableViewCell.swift */,
-				E686C08A280F1A9500B4EB0D /* PhotosViewController.swift */,
-				E686C08E280F1A9500B4EB0D /* PostTableViewCell.swift */,
-				E686C089280F1A9500B4EB0D /* ProfileTableHeaderView.swift */,
 				E686C090280F1A9500B4EB0D /* ProfileViewController.swift */,
+				E686C089280F1A9500B4EB0D /* ProfileTableHeaderView.swift */,
+				E686C08A280F1A9500B4EB0D /* PhotosViewController.swift */,
+				E686C08C280F1A9500B4EB0D /* PhotosTableViewCell.swift */,
+				E686C08B280F1A9500B4EB0D /* PhotosCollectionViewCell.swift */,
+				E686C08E280F1A9500B4EB0D /* PostTableViewCell.swift */,
 				E686C091280F1A9500B4EB0D /* ContentGenerator.swift */,
 			);
 			path = Profile;
