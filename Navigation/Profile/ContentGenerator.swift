@@ -42,7 +42,7 @@ final class ContentGenerator {
         likes: 344,
         views: 368
     )
-
+    
 //    MARK: - func posts()
     
     func posts() -> [Post] {
