@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class ProfileTableHeaderView: UIView {
     
@@ -30,7 +31,12 @@ final class ProfileTableHeaderView: UIView {
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .black
         button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        button.frame = CGRect(x: UIScreen.main.bounds.width - Constants.spacing - Constants.closeButtonSize, y: Constants.spacing, width: Constants.closeButtonSize, height: Constants.closeButtonSize)
+        button.frame = CGRect(
+            x: UIScreen.main.bounds.width - Constants.spacing - Constants.closeButtonSize,
+            y: Constants.spacing,
+            width: Constants.closeButtonSize,
+            height: Constants.closeButtonSize
+        )
         button.alpha = 0
         
         return button
@@ -45,7 +51,6 @@ final class ProfileTableHeaderView: UIView {
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
-        imageView.toAutoLayout()
         
         return imageView
     }()
@@ -55,7 +60,6 @@ final class ProfileTableHeaderView: UIView {
         label.text = "Hipster Cat"
         label.textColor = .black
         label.font = UIFont(name: "AvenirNext-Bold", size: 18)
-        label.toAutoLayout()
         
         return label
     }()
@@ -65,7 +69,6 @@ final class ProfileTableHeaderView: UIView {
         label.text = "Waiting for something..."
         label.textColor = .gray
         label.font = UIFont(name: "Avenir Next", size: 14)
-        label.toAutoLayout()
         
         return label
     }()
@@ -82,7 +85,6 @@ final class ProfileTableHeaderView: UIView {
         textField.leftView = leftView
         textField.leftViewMode = .always
         textField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
-        textField.toAutoLayout()
         
         return textField
     }()
@@ -98,7 +100,6 @@ final class ProfileTableHeaderView: UIView {
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
         button.addTarget(self, action: #selector(setStatusButtonTapped), for: .touchUpInside)
-        button.toAutoLayout()
         
         return button
     }()
@@ -137,32 +138,35 @@ final class ProfileTableHeaderView: UIView {
     }
     
     private func setConstraints() {
-        NSLayoutConstraint.activate([
-            profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.spacing),
-            profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.spacing),
-            profileImageView.widthAnchor.constraint(equalToConstant: 100),
-            profileImageView.heightAnchor.constraint(equalToConstant: 100),
-            
-            profileNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
-            profileNameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: Constants.spacing),
-            profileNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.spacing),
-            
-            profileStatusLabel.topAnchor.constraint(equalTo: profileNameLabel.bottomAnchor, constant: 20),
-            profileStatusLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: Constants.spacing),
-            profileStatusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.spacing),
-            
-            profileStatusTextField.topAnchor.constraint(equalTo: profileStatusLabel.bottomAnchor, constant: 8),
-            profileStatusTextField.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: Constants.spacing),
-            profileStatusTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.spacing),
-            profileStatusTextField.heightAnchor.constraint(equalToConstant: 40),
-            
-            setStatusButton.topAnchor.constraint(equalTo: profileStatusTextField.bottomAnchor, constant: Constants.spacing),
-            setStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.spacing),
-            setStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.spacing),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.spacing)
-
-        ])
+        profileImageView.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().offset(Constants.spacing)
+            make.width.height.equalTo(100)
+        }
+        
+        profileNameLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(27)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(Constants.spacing)
+            make.trailing.equalToSuperview().offset(-Constants.spacing)
+        }
+        
+        profileStatusLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileNameLabel.snp.bottom).offset(20)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(Constants.spacing)
+            make.trailing.equalToSuperview().offset(-Constants.spacing)
+        }
+        
+        profileStatusTextField.snp.makeConstraints { make in
+            make.top.equalTo(profileStatusLabel.snp.bottom).offset(8)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(Constants.spacing)
+            make.trailing.equalToSuperview().offset(-Constants.spacing)
+            make.height.equalTo(40)
+        }
+        
+        setStatusButton.snp.makeConstraints { make in
+            make.top.equalTo(profileStatusTextField.snp.bottom).offset(Constants.spacing)
+            make.leading.trailing.bottom.equalToSuperview().inset(Constants.spacing)
+            make.height.equalTo(50)
+        }
     }
     
     @objc

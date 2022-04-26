@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import StorageService
 
 final class ContentGenerator {
     
@@ -41,7 +42,7 @@ final class ContentGenerator {
         likes: 344,
         views: 368
     )
-
+    
 //    MARK: - func posts()
     
     func posts() -> [Post] {

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import StorageService
+import iOSIntPackage
 
 final class PostTableViewCell: UITableViewCell {
     
@@ -13,6 +15,8 @@ final class PostTableViewCell: UITableViewCell {
         static let spacing: CGFloat = 16
         static let screenWidth = UIScreen.main.bounds.width
     }
+    
+    let imageProcessor = ImageProcessor()
 
     private let authorLabel: UILabel = {
         let label = UILabel()
@@ -86,14 +90,6 @@ final class PostTableViewCell: UITableViewCell {
         )
     }
     
-    public func update(with post: Post) {
-        authorLabel.text = post.author
-        postImageView.image = UIImage(named: post.image)
-        descriptionLabel.text = post.description
-        likesLabel.text = "Likes: " + String(post.likes)
-        viewsLabel.text = "Views: " + String(post.views)
-    }
-    
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
@@ -118,6 +114,23 @@ final class PostTableViewCell: UITableViewCell {
             viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constants.spacing),
             viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.spacing),
         ])
-    
     }
+    
+    private func applyFilter(imageName: String) {
+        guard let image = UIImage(named: imageName), let filter = ColorFilter.allCases.randomElement() else {
+            return
+        }
+        imageProcessor.processImage(sourceImage: image, filter: filter) { image in
+            self.postImageView.image = image
+        }
+    }
+    
+    public func update(with post: Post) {
+        authorLabel.text = post.author
+        descriptionLabel.text = post.description
+        likesLabel.text = "Likes: " + String(post.likes)
+        viewsLabel.text = "Views: " + String(post.views)
+        applyFilter(imageName: post.image)
+    }
+    
 }
