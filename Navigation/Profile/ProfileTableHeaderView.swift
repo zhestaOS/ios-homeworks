@@ -42,7 +42,7 @@ final class ProfileTableHeaderView: UIView {
         return button
     }()
     
-    private let profileImageView: UIImageView = {
+    private let avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 50
         imageView.layer.borderWidth = 3
@@ -55,7 +55,7 @@ final class ProfileTableHeaderView: UIView {
         return imageView
     }()
     
-    private let profileNameLabel: UILabel = {
+    private let usernameLabel: UILabel = {
         let label = UILabel()
         label.text = "Hipster Cat"
         label.textColor = .black
@@ -64,7 +64,7 @@ final class ProfileTableHeaderView: UIView {
         return label
     }()
     
-    private let profileStatusLabel: UILabel = {
+    private let statusLabel: UILabel = {
         let label = UILabel()
         label.text = "Waiting for something..."
         label.textColor = .gray
@@ -73,7 +73,7 @@ final class ProfileTableHeaderView: UIView {
         return label
     }()
     
-    private let profileStatusTextField: UITextField = {
+    private let statusTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.textColor = .black
@@ -109,13 +109,13 @@ final class ProfileTableHeaderView: UIView {
         
         let recognizer = UITapGestureRecognizer()
         recognizer.addTarget(self, action: #selector(tapGesture(_:)))
-        profileImageView.addGestureRecognizer(recognizer)
+        avatarImageView.addGestureRecognizer(recognizer)
         
         addSubviews()
         setConstraints()
         
         bringSubviewToFront(backView)
-        bringSubviewToFront(profileImageView)
+        bringSubviewToFront(avatarImageView)
         bringSubviewToFront(closeButton)
         
         backgroundColor = .systemGray6
@@ -125,45 +125,51 @@ final class ProfileTableHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func update(user: User) {
+        usernameLabel.text = user.name
+        avatarImageView.image = user.avatar
+        statusLabel.text = user.status
+    }
+    
     private func addSubviews() {
         addSubviews(
             backView,
-            profileImageView,
-            profileNameLabel,
-            profileStatusLabel,
+            avatarImageView,
+            usernameLabel,
+            statusLabel,
             setStatusButton,
-            profileStatusTextField
+            statusTextField
         )
         backView.addSubview(closeButton)
     }
     
     private func setConstraints() {
-        profileImageView.snp.makeConstraints { make in
+        avatarImageView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().offset(Constants.spacing)
             make.width.height.equalTo(100)
         }
         
-        profileNameLabel.snp.makeConstraints { make in
+        usernameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(27)
-            make.leading.equalTo(profileImageView.snp.trailing).offset(Constants.spacing)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(Constants.spacing)
             make.trailing.equalToSuperview().offset(-Constants.spacing)
         }
         
-        profileStatusLabel.snp.makeConstraints { make in
-            make.top.equalTo(profileNameLabel.snp.bottom).offset(20)
-            make.leading.equalTo(profileImageView.snp.trailing).offset(Constants.spacing)
+        statusLabel.snp.makeConstraints { make in
+            make.top.equalTo(usernameLabel.snp.bottom).offset(20)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(Constants.spacing)
             make.trailing.equalToSuperview().offset(-Constants.spacing)
         }
         
-        profileStatusTextField.snp.makeConstraints { make in
-            make.top.equalTo(profileStatusLabel.snp.bottom).offset(8)
-            make.leading.equalTo(profileImageView.snp.trailing).offset(Constants.spacing)
+        statusTextField.snp.makeConstraints { make in
+            make.top.equalTo(statusLabel.snp.bottom).offset(8)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(Constants.spacing)
             make.trailing.equalToSuperview().offset(-Constants.spacing)
             make.height.equalTo(40)
         }
         
         setStatusButton.snp.makeConstraints { make in
-            make.top.equalTo(profileStatusTextField.snp.bottom).offset(Constants.spacing)
+            make.top.equalTo(statusTextField.snp.bottom).offset(Constants.spacing)
             make.leading.trailing.bottom.equalToSuperview().inset(Constants.spacing)
             make.height.equalTo(50)
         }
@@ -171,7 +177,7 @@ final class ProfileTableHeaderView: UIView {
     
     @objc
     func setStatusButtonTapped() {
-        profileStatusLabel.text = statusText
+        statusLabel.text = statusText
     }
     
     @objc
@@ -208,10 +214,10 @@ final class ProfileTableHeaderView: UIView {
                     relativeDuration: 0.5) {
                         self.backView.alpha = 1
 
-                        self.profileImageView.center = superviewCenter
-                        self.profileImageView.layer.bounds.size.width = superWidth
-                        self.profileImageView.layer.bounds.size.height = superWidth
-                        self.profileImageView.layer.cornerRadius = 0
+                        self.avatarImageView.center = superviewCenter
+                        self.avatarImageView.layer.bounds.size.width = superWidth
+                        self.avatarImageView.layer.bounds.size.height = superWidth
+                        self.avatarImageView.layer.cornerRadius = 0
                     }
                 UIView.addKeyframe(
                     withRelativeStartTime: 0.5,
@@ -239,8 +245,8 @@ final class ProfileTableHeaderView: UIView {
                     relativeDuration: 0.5) {
                         self.backView.alpha = 0
                         
-                        self.profileImageView.frame = CGRect(x: Constants.spacing, y: Constants.spacing, width: 100, height: 100)
-                        self.profileImageView.layer.cornerRadius = 50
+                        self.avatarImageView.frame = CGRect(x: Constants.spacing, y: Constants.spacing, width: 100, height: 100)
+                        self.avatarImageView.layer.cornerRadius = 50
 
                     }
             },
