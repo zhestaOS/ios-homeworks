@@ -17,6 +17,7 @@
 		E67E693228087116000C50D8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E8EBB627592EDB009C49C7 /* Post.swift */; };
 		E67E6934280879D3000C50D8 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67E691428087084000C50D8 /* StorageService.framework */; };
 		E684113A280C2F2700C98418 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = E6841139280C2F2700C98418 /* iOSIntPackage */; };
+		E684B49128198C2E00459049 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E684B49028198C2E00459049 /* TestUserService.swift */; };
 		E686C092280F1A9500B4EB0D /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686C089280F1A9500B4EB0D /* ProfileTableHeaderView.swift */; };
 		E686C093280F1A9500B4EB0D /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686C08A280F1A9500B4EB0D /* PhotosViewController.swift */; };
 		E686C094280F1A9500B4EB0D /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686C08B280F1A9500B4EB0D /* PhotosCollectionViewCell.swift */; };
@@ -32,6 +33,8 @@
 		E6E8EBB32757D8BB009C49C7 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E8EBB22757D8BB009C49C7 /* FeedViewController.swift */; };
 		E6E8EBB52757E28A009C49C7 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E8EBB42757E28A009C49C7 /* PostViewController.swift */; };
 		E6E8EBB9275938A1009C49C7 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E8EBB8275938A1009C49C7 /* InfoViewController.swift */; };
+		E6FAD673281860DE007B4AD5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAD672281860DE007B4AD5 /* User.swift */; };
+		E6FAD675281868B4007B4AD5 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FAD674281868B4007B4AD5 /* CurrentUserService.swift */; };
 		FD3F3B68FEA0947D6693428C /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070E3FBBFB0C4D0D030DA236 /* Pods_Navigation.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +80,7 @@
 		E67E691428087084000C50D8 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E67E691628087084000C50D8 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		E67E691728087084000C50D8 /* StorageService.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StorageService.docc; sourceTree = "<group>"; };
+		E684B49028198C2E00459049 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		E686C089280F1A9500B4EB0D /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		E686C08A280F1A9500B4EB0D /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		E686C08B280F1A9500B4EB0D /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -93,6 +97,8 @@
 		E6E8EBB42757E28A009C49C7 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		E6E8EBB627592EDB009C49C7 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		E6E8EBB8275938A1009C49C7 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		E6FAD672281860DE007B4AD5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E6FAD674281868B4007B4AD5 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		EB6FD223148E2BCC0C808971 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +166,9 @@
 				E686C08B280F1A9500B4EB0D /* PhotosCollectionViewCell.swift */,
 				E686C08E280F1A9500B4EB0D /* PostTableViewCell.swift */,
 				E686C091280F1A9500B4EB0D /* ContentGenerator.swift */,
+				E6FAD672281860DE007B4AD5 /* User.swift */,
+				E6FAD674281868B4007B4AD5 /* CurrentUserService.swift */,
+				E684B49028198C2E00459049 /* TestUserService.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -395,12 +404,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6FAD675281868B4007B4AD5 /* CurrentUserService.swift in Sources */,
 				E686C095280F1A9500B4EB0D /* PhotosTableViewCell.swift in Sources */,
 				E686C093280F1A9500B4EB0D /* PhotosViewController.swift in Sources */,
 				E6E8EB8127529309009C49C7 /* (null) in Sources */,
 				E686C099280F1A9500B4EB0D /* ProfileViewController.swift in Sources */,
+				E6FAD673281860DE007B4AD5 /* User.swift in Sources */,
 				E686C09A280F1A9500B4EB0D /* ContentGenerator.swift in Sources */,
 				E6E8EBB32757D8BB009C49C7 /* FeedViewController.swift in Sources */,
+				E684B49128198C2E00459049 /* TestUserService.swift in Sources */,
 				E686C097280F1A9500B4EB0D /* PostTableViewCell.swift in Sources */,
 				E6416FA327737DDC0033E6E9 /* UIView+Extension.swift in Sources */,
 				E686C09C280F1BD000B4EB0D /* AppDelegate.swift in Sources */,

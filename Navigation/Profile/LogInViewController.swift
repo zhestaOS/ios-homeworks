@@ -8,7 +8,7 @@
 import UIKit
 
 final class LogInViewController: UIViewController {
-    
+        
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = true
@@ -38,10 +38,10 @@ final class LogInViewController: UIViewController {
         return imageView
     }()
     
-    private let emailTextField: UITextField = {
+    private let usernameTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Email or phone"
+        textField.placeholder = "Username"
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.tintColor = UIColor.red
@@ -93,7 +93,7 @@ final class LogInViewController: UIViewController {
         button.setBackgroundImage(imgForOtherState, for: .disabled)
         button.layer.cornerRadius = 10.0
         button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(setLogInButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(logInButtonTapped), for: .touchUpInside)
         button.toAutoLayout()
         
         return button
@@ -123,7 +123,7 @@ final class LogInViewController: UIViewController {
         scrollView.addSubview(contentView)
         contentView.addSubviews(
             vkLogoImageView,
-            emailTextField,
+            usernameTextField,
             passwordTextField,
             logInButton
         )
@@ -148,12 +148,12 @@ final class LogInViewController: UIViewController {
             vkLogoImageView.widthAnchor.constraint(equalToConstant: 100),
             vkLogoImageView.heightAnchor.constraint(equalToConstant: 100),
             
-            emailTextField.topAnchor.constraint(equalTo: vkLogoImageView.bottomAnchor, constant: 120),
-            emailTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            emailTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            emailTextField.heightAnchor.constraint(equalToConstant: 50),
+            usernameTextField.topAnchor.constraint(equalTo: vkLogoImageView.bottomAnchor, constant: 120),
+            usernameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            usernameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            usernameTextField.heightAnchor.constraint(equalToConstant: 50),
             
-            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor),
+            passwordTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
@@ -196,8 +196,19 @@ final class LogInViewController: UIViewController {
     }
     
     @objc
-    private func setLogInButtonTapped() {
-        let vc = ProfileViewController()
+    private func logInButtonTapped() {
+        guard let username = usernameTextField.text else { return }
+        
+        var userService: UserService
+        
+        #if DEBUG
+        userService = TestUserService()
+        #else
+        userService = CurrentUserService()
+        #endif
+        
+        let vc = ProfileViewController(userService: userService, username: username)
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     

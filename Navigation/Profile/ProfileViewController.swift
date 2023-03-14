@@ -10,6 +10,9 @@ import StorageService
 
 final class ProfileViewController: UIViewController {
     
+    private let username: String
+    private let userService: UserService
+    
     private var posts = [Post]()
     
     private let contentGenerator = ContentGenerator()
@@ -24,12 +27,26 @@ final class ProfileViewController: UIViewController {
         
         return table
     }()
+
+    init(userService: UserService, username: String) {
+        self.userService = userService
+        self.username = username
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         header.isUserInteractionEnabled = true
         
+        if let user = userService.returnUser(username: username) {
+            header.update(user: user)
+        }
+                
         #if DEBUG
         header.backgroundColor = .systemOrange
         #else
