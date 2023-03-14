@@ -15,12 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         
+        let contentFactory = ContentFactory()
+        
         let tabBarController = UITabBarController()
 
         let feedVC = FeedViewController()
         let feedNC = UINavigationController(rootViewController: feedVC)
         
         let profileVC = LogInViewController()
+        
+        let loginInspector = contentFactory.makeLoginInspector()
+        profileVC.loginDelegate = loginInspector
+        
         let profileNC = UINavigationController(rootViewController: profileVC)
         profileNC.view.backgroundColor = .white
         

@@ -1,5 +1,5 @@
 //
-//  PhotoArrayGenerator.swift
+//  ContentGenerator.swift
 //  Navigation
 //
 //  Created by Евгения Шевякова on 30.03.2022.
@@ -9,7 +9,11 @@ import Foundation
 import UIKit
 import StorageService
 
-final class ContentGenerator {
+protocol LoginFactoryProtocol {
+    func makeLoginInspector() -> LoginInspector
+}
+
+final class ContentFactory: LoginFactoryProtocol {
     
     let post1 = Post(
         author: "lingva.ru",
@@ -53,6 +57,12 @@ final class ContentGenerator {
     
     func photos() -> [UIImage] {
         (0...20).compactMap { UIImage(named: "photo\($0)") }
+    }
+    
+//    MARK: - func makeLoginInspector()
+    
+    func makeLoginInspector() -> LoginInspector {
+        LoginInspector()
     }
     
 }

@@ -6,7 +6,7 @@ target 'Navigation' do
   use_frameworks!
 
   # Pods for Navigation
-  pod 'SnapKit'
+  pod 'SnapKit', '5.6.0'
 
 end
 

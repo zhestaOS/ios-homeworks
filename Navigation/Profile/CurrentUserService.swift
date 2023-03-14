@@ -13,14 +13,8 @@ protocol UserService {
 }
 
 final class CurrentUserService: UserService {
-    
-    private var user = User(name: "Ivan", avatar: UIImage(named: "photo3"), status: "online")
-    
     func returnUser(username: String) -> User? {
-        if user.name == username {
-            return user
-        } else {
-            return nil
-        }
+        let user = User(name: username, avatar: UIImage(named: "photo17"), status: "online")
+        return user
     }
 }

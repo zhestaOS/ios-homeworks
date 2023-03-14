@@ -11,7 +11,7 @@ final class PhotosViewController: UIViewController {
     
     private var photos = [UIImage]()
     
-    private let contentGenerator = ContentGenerator()
+    private let contentGenerator = ContentFactory()
     
     enum Constants {
         static let spacing: CGFloat = 8
