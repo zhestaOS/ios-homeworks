@@ -10,12 +10,11 @@ import StorageService
 
 final class ProfileViewController: UIViewController {
     
-    private let username: String
-    private let userService: UserService
+    private let user: User
     
     private var posts = [Post]()
     
-    private let contentGenerator = ContentGenerator()
+    private let contentFactory = ContentFactory()
     
     private let header = ProfileTableHeaderView()
     
@@ -28,9 +27,8 @@ final class ProfileViewController: UIViewController {
         return table
     }()
 
-    init(userService: UserService, username: String) {
-        self.userService = userService
-        self.username = username
+    init(user: User) {
+        self.user = user
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -43,9 +41,7 @@ final class ProfileViewController: UIViewController {
         
         header.isUserInteractionEnabled = true
         
-        if let user = userService.returnUser(username: username) {
-            header.update(user: user)
-        }
+        header.update(user: user)
                 
         #if DEBUG
         header.backgroundColor = .systemOrange
@@ -57,7 +53,7 @@ final class ProfileViewController: UIViewController {
         setupViews()
         setConstraints()
                 
-        posts = contentGenerator.posts()
+        posts = contentFactory.posts()
         
         tableView.reloadData()
      

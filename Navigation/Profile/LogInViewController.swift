@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate {
+    func check(login: String, password: String) -> Bool
+}
+
 final class LogInViewController: UIViewController {
+    
+    var loginDelegate: LoginViewControllerDelegate?
         
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -38,7 +44,7 @@ final class LogInViewController: UIViewController {
         return imageView
     }()
     
-    private let usernameTextField: UITextField = {
+    private let loginTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
         textField.placeholder = "Username"
@@ -123,7 +129,7 @@ final class LogInViewController: UIViewController {
         scrollView.addSubview(contentView)
         contentView.addSubviews(
             vkLogoImageView,
-            usernameTextField,
+            loginTextField,
             passwordTextField,
             logInButton
         )
@@ -148,12 +154,12 @@ final class LogInViewController: UIViewController {
             vkLogoImageView.widthAnchor.constraint(equalToConstant: 100),
             vkLogoImageView.heightAnchor.constraint(equalToConstant: 100),
             
-            usernameTextField.topAnchor.constraint(equalTo: vkLogoImageView.bottomAnchor, constant: 120),
-            usernameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            usernameTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            usernameTextField.heightAnchor.constraint(equalToConstant: 50),
+            loginTextField.topAnchor.constraint(equalTo: vkLogoImageView.bottomAnchor, constant: 120),
+            loginTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            loginTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            loginTextField.heightAnchor.constraint(equalToConstant: 50),
             
-            passwordTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor),
+            passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
@@ -197,24 +203,38 @@ final class LogInViewController: UIViewController {
     
     @objc
     private func logInButtonTapped() {
-        guard let username = usernameTextField.text else { return }
+        
+        guard let username = loginTextField.text, let password = passwordTextField.text else { return }
         
         var userService: UserService
         
-        #if DEBUG
-        userService = TestUserService()
-        #else
+//        #if DEBUG
+//        userService = TestUserService()
+//        #else
         userService = CurrentUserService()
-        #endif
+//        #endif
         
-        let vc = ProfileViewController(userService: userService, username: username)
+        guard let loginDelegate = loginDelegate, loginDelegate.check(login: username, password: password) else {
+            showLoginError()
+            return
+        }
+
+        guard let user = userService.returnUser(username: username) else { return }
         
+        let vc = ProfileViewController(user: user)
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc
     func tapGesture(_ gesture: UITapGestureRecognizer) {
         print("Did catch tap action")
+    }
+    
+    private func showLoginError() {
+        let alertController = UIAlertController(title: "", message: "Введены некорректные данные, попробуйте еще раз", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Попробовать", style: .cancel)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
     }
     
 }
