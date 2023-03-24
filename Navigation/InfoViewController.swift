@@ -9,8 +9,12 @@ import UIKit
 
 final class InfoViewController: UIViewController {
     
+    // MARK: - Properties
+    
     let buttonWidth: CGFloat = 200
     let buttonHeight: CGFloat = 44
+    
+    // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +34,8 @@ final class InfoViewController: UIViewController {
         view.backgroundColor = .white
 
     }
+    
+    // MARK: - Methods
     
     @objc
     func alertButtonTapped() {

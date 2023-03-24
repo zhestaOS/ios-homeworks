@@ -8,6 +8,8 @@
 import UIKit
 
 final class FeedViewController: UIViewController {
+    
+    // MARK: - Properties
         
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -50,6 +52,8 @@ final class FeedViewController: UIViewController {
         
         return button
     }()
+    
+    // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +61,8 @@ final class FeedViewController: UIViewController {
         addSubviews()
         setConstraints()
     }
+    
+    // MARK: - Methods
     
     private func addSubviews() {
         view.addSubviews(

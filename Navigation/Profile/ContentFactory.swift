@@ -15,6 +15,8 @@ protocol LoginFactoryProtocol {
 
 final class ContentFactory: LoginFactoryProtocol {
     
+    // MARK: - Properties
+    
     let post1 = Post(
         author: "lingva.ru",
         image: "mountains",
@@ -47,19 +49,15 @@ final class ContentFactory: LoginFactoryProtocol {
         views: 368
     )
     
-//    MARK: - func posts()
+    // MARK: - Methods
     
     func posts() -> [Post] {
         [post1, post2, post3, post4]
     }
- 
-//    MARK: - func photos()
-    
+
     func photos() -> [UIImage] {
         (0...20).compactMap { UIImage(named: "photo\($0)") }
     }
-    
-//    MARK: - func makeLoginInspector()
     
     func makeLoginInspector() -> LoginInspector {
         LoginInspector()

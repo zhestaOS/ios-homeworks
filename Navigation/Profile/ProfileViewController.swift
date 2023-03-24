@@ -10,6 +10,8 @@ import StorageService
 
 final class ProfileViewController: UIViewController {
     
+    // MARK: - Properties
+    
     private let user: User
     
     private var posts = [Post]()
@@ -26,6 +28,8 @@ final class ProfileViewController: UIViewController {
         
         return table
     }()
+    
+    // MARK: - Life cycle
 
     init(user: User) {
         self.user = user
@@ -64,6 +68,8 @@ final class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    // MARK: - Methods
+    
     private func addSubviews() {
         view.addSubview(tableView)
     }
@@ -90,6 +96,8 @@ final class ProfileViewController: UIViewController {
         ])
     }
 }
+
+// MARK: - Extension
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
