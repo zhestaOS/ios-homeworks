@@ -14,6 +14,8 @@ final class PhotosTableViewCell: UITableViewCell {
         static let screenWidth = UIScreen.main.bounds.width
         static let photoPreviewSize = (screenWidth - 2 * spacing - 24) / 4
     }
+    
+    // MARK: - Properties
             
     private let photosLabel: UILabel = {
         let label = UILabel()
@@ -88,6 +90,8 @@ final class PhotosTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    // MARK: - Life cycle
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         
@@ -100,6 +104,8 @@ final class PhotosTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Methods
     
     private func addSubviews() {
         contentView.addSubviews(

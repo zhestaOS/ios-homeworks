@@ -13,6 +13,8 @@ protocol ReusableView: AnyObject {
 
 final class PhotosCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
+    
     private let photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
@@ -21,6 +23,8 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         
         return imageView
     }()
+    
+    // MARK: - Life cycle
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -32,6 +36,8 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Methods
     
     private func addSubviews() {
         contentView.addSubview(photoImageView)
@@ -50,6 +56,8 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
         photoImageView.image = photo
     }
 }
+
+// MARK: - Extension
 
 extension PhotosCollectionViewCell: ReusableView {
     static var identifier: String {

@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 final class PhotosViewController: UIViewController {
     
+    // MARK: - Properties
+    
     private var photos = [UIImage]()
     
-    private let contentGenerator = ContentFactory()
+    private let contentFactory = ContentFactory()
+    
+    private let imagePublisher = ImagePublisherFacade()
     
     enum Constants {
         static let spacing: CGFloat = 8
@@ -28,6 +33,8 @@ final class PhotosViewController: UIViewController {
         
         return collection
     }()
+    
+    // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,15 +43,25 @@ final class PhotosViewController: UIViewController {
         setupViews()
         setConstraints()
         
-        photos = contentGenerator.photos()
-        
-        collectionView.reloadData()
+        imagePublisher.subscribe(self)
+        imagePublisher.addImagesWithTimer(
+            time: 0.5,
+            repeat: 20,
+            userImages: contentFactory.photos()
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        imagePublisher.removeSubscription(for: self)
+    }
+    
+    // MARK: - Methods
     
     private func addSubviews() {
         view.addSubview(collectionView)
@@ -79,6 +96,8 @@ final class PhotosViewController: UIViewController {
     }
     
 }
+
+// MARK: - Extensions
 
 extension PhotosViewController: UICollectionViewDataSource {
    
@@ -125,4 +144,14 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         Constants.spacing
     }
 
+}
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        photos = images
+        collectionView.reloadData()
+    }
+    
+    
+    
 }

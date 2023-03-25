@@ -13,6 +13,8 @@ protocol LoginViewControllerDelegate {
 
 final class LogInViewController: UIViewController {
     
+    // MARK: - Properties
+    
     var loginDelegate: LoginViewControllerDelegate?
         
     private let scrollView: UIScrollView = {
@@ -48,6 +50,9 @@ final class LogInViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
         textField.placeholder = "Username"
+        
+        textField.text = Checker.shared.predefinedLogin()
+        
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.tintColor = UIColor.red
@@ -68,6 +73,9 @@ final class LogInViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
         textField.placeholder = "Password"
+        
+        textField.text = Checker.shared.predefinedPassword()
+        
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.tintColor = UIColor.red
@@ -105,6 +113,8 @@ final class LogInViewController: UIViewController {
         return button
     }()
     
+    // MARK: - Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -123,6 +133,8 @@ final class LogInViewController: UIViewController {
         setConstraints()
         
     }
+    
+    // MARK: - Methods
     
     private func addSubviews() {
         view.addSubview(scrollView)

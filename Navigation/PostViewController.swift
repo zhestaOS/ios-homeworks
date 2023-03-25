@@ -10,7 +10,11 @@ import StorageService
 
 final class PostViewController: UIViewController {
     
+    // MARK: - Properties
+    
     var post: Post?
+    
+    // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +25,8 @@ final class PostViewController: UIViewController {
         navigationItem.rightBarButtonItem = infoBarButton
         
     }
+    
+    // MARK: - Methods
     
     @objc
     func infoBarButtonTapped() {

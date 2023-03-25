@@ -15,6 +15,8 @@ final class ProfileTableHeaderView: UIView {
         static let closeButtonSize: CGFloat = 20
     }
     
+    // MARK: - Properties
+    
     private var statusText: String?
     
     private let backView: UIView = {
@@ -104,6 +106,8 @@ final class ProfileTableHeaderView: UIView {
         return button
     }()
     
+    // MARK: - Life cycle
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
@@ -124,6 +128,8 @@ final class ProfileTableHeaderView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Methods
     
     func update(user: User) {
         usernameLabel.text = user.name

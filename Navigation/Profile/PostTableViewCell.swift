@@ -16,6 +16,8 @@ final class PostTableViewCell: UITableViewCell {
         static let screenWidth = UIScreen.main.bounds.width
     }
     
+    // MARK: - Properties
+    
     let imageProcessor = ImageProcessor()
 
     private let authorLabel: UILabel = {
@@ -65,6 +67,8 @@ final class PostTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Life cycle
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         customInit()
@@ -79,6 +83,8 @@ final class PostTableViewCell: UITableViewCell {
         addSubviews()
         setConstraints()
     }
+    
+    // MARK: - Methods
     
     private func addSubviews() {
         contentView.addSubviews(
