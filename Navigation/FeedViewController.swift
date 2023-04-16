@@ -10,6 +10,8 @@ import UIKit
 final class FeedViewController: UIViewController {
     
     // MARK: - Properties
+    
+    private let feedModel = FeedModel.shared
         
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -21,37 +23,48 @@ final class FeedViewController: UIViewController {
         return stackView
     }()
     
-    private let firstButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("First button", for: .normal)
-        button.backgroundColor = .systemGreen
-        button.titleLabel?.textColor = .white
-        button.layer.cornerRadius = 14
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        button.addTarget(self, action: #selector(transitionButtonTapped), for: .touchUpInside)
-        button.toAutoLayout()
-        
-        return button
+    private let firstButton = CustomButton(
+        title: "First button",
+        сolorOfBackground: .systemGreen
+    )
+    
+    private let secondButton = CustomButton(
+        title: "Second button",
+        сolorOfBackground: .systemTeal
+    )
+    
+    private let checkGuessButton = CustomButton(
+        title: "Check guess",
+        сolorOfBackground: .systemOrange
+    )
+    
+    private var guessText: String?
+    
+    private let checkGuessTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .white
+        textField.textColor = .black
+        textField.font = UIFont(name: "Avenir Next", size: 15)
+        textField.layer.cornerRadius = 14
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderWidth = 1
+        let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 14, height: 0))
+        textField.leftView = leftView
+        textField.leftViewMode = .always
+        textField.addTarget(self, action: #selector(guessChecked(_:)), for: .editingChanged)
+
+        return textField
     }()
     
-    private let secondButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Second button", for: .normal)
-        button.backgroundColor = .systemTeal
-        button.titleLabel?.textColor = .white
-        button.layer.cornerRadius = 14
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        button.addTarget(self, action: #selector(transitionButtonTapped), for: .touchUpInside)
-        button.toAutoLayout()
+    private let checkGuessLabel: UILabel = {
+        let label = UILabel()
+        label.text = "The result will be here"
+        label.textColor = .black
+        label.font = UIFont(name: "AvenirNext-Bold", size: 18)
         
-        return button
+        return label
     }()
+    
     
     // MARK: - Life cycle
 
@@ -60,6 +73,16 @@ final class FeedViewController: UIViewController {
         view.backgroundColor = .white
         addSubviews()
         setConstraints()
+        
+        firstButton.tapAction = {
+            self.transitionButtonTapped()
+        }
+        secondButton.tapAction = {
+            self.transitionButtonTapped()
+        }
+        checkGuessButton.tapAction = {
+            self.checkGuessButtonTapped()
+        }
     }
     
     // MARK: - Methods
@@ -68,11 +91,17 @@ final class FeedViewController: UIViewController {
         view.addSubviews(
             stackView,
             firstButton,
-            secondButton
+            secondButton,
+            checkGuessButton,
+            checkGuessTextField,
+            checkGuessLabel
         )
 
         stackView.addArrangedSubview(firstButton)
         stackView.addArrangedSubview(secondButton)
+        stackView.addArrangedSubview(checkGuessTextField)
+        stackView.addArrangedSubview(checkGuessLabel)
+        stackView.addArrangedSubview(checkGuessButton)
     }
     
     private func setConstraints() {
@@ -85,7 +114,18 @@ final class FeedViewController: UIViewController {
             
             secondButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             secondButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            secondButton.heightAnchor.constraint(equalToConstant: 50)
+            secondButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            checkGuessTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            checkGuessTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            checkGuessTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            checkGuessLabel.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
+            checkGuessLabel.heightAnchor.constraint(equalToConstant: 25),
+            
+            checkGuessButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            checkGuessButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            checkGuessButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -95,4 +135,19 @@ final class FeedViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc
+    func checkGuessButtonTapped() {
+        if feedModel.check(word: guessText) {
+            checkGuessLabel.text = "Right!"
+            checkGuessLabel.textColor = .green
+        } else {
+            checkGuessLabel.text = "Wrong"
+            checkGuessLabel.textColor = .red
+        }
+    }
+    
+    @objc
+    func guessChecked(_ textField: UITextField) {
+        guessText = textField.text
+    }
 }

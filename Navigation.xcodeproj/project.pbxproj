@@ -18,6 +18,7 @@
 		E67E692A28087084000C50D8 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E67E691428087084000C50D8 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E67E693228087116000C50D8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E8EBB627592EDB009C49C7 /* Post.swift */; };
 		E67E6934280879D3000C50D8 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67E691428087084000C50D8 /* StorageService.framework */; };
+		E683648129CED9D60031BD3F /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E683648029CED9D60031BD3F /* CustomButton.swift */; };
 		E684113A280C2F2700C98418 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = E6841139280C2F2700C98418 /* iOSIntPackage */; };
 		E684B49128198C2E00459049 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E684B49028198C2E00459049 /* TestUserService.swift */; };
 		E686C092280F1A9500B4EB0D /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686C089280F1A9500B4EB0D /* ProfileTableHeaderView.swift */; };
@@ -29,6 +30,7 @@
 		E686C099280F1A9500B4EB0D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686C090280F1A9500B4EB0D /* ProfileViewController.swift */; };
 		E686C09A280F1A9500B4EB0D /* ContentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686C091280F1A9500B4EB0D /* ContentFactory.swift */; };
 		E686C09C280F1BD000B4EB0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686C09B280F1BD000B4EB0D /* AppDelegate.swift */; };
+		E69D1FEB29EBEE1B0064F6A5 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69D1FEA29EBEE1B0064F6A5 /* FeedModel.swift */; };
 		E6E8EB8127529309009C49C7 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		E6E8EB8A2752930C009C49C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6E8EB892752930C009C49C7 /* Assets.xcassets */; };
 		E6E8EB8D2752930C009C49C7 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -84,6 +86,7 @@
 		E67E691428087084000C50D8 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E67E691628087084000C50D8 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		E67E691728087084000C50D8 /* StorageService.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StorageService.docc; sourceTree = "<group>"; };
+		E683648029CED9D60031BD3F /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		E684B49028198C2E00459049 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		E686C089280F1A9500B4EB0D /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		E686C08A280F1A9500B4EB0D /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +97,7 @@
 		E686C090280F1A9500B4EB0D /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E686C091280F1A9500B4EB0D /* ContentFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentFactory.swift; sourceTree = "<group>"; };
 		E686C09B280F1BD000B4EB0D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E69D1FEA29EBEE1B0064F6A5 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		E6E8EB7D27529309009C49C7 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E8EB892752930C009C49C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6E8EB8E2752930C009C49C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -205,8 +209,10 @@
 				E686C088280F1A9500B4EB0D /* Profile */,
 				E686C09B280F1BD000B4EB0D /* AppDelegate.swift */,
 				E6E8EBB22757D8BB009C49C7 /* FeedViewController.swift */,
+				E69D1FEA29EBEE1B0064F6A5 /* FeedModel.swift */,
 				E6E8EBB8275938A1009C49C7 /* InfoViewController.swift */,
 				E6E8EBB42757E28A009C49C7 /* PostViewController.swift */,
+				E683648029CED9D60031BD3F /* CustomButton.swift */,
 				E623F5B127C533CA008E1943 /* UIImage+Extension.swift */,
 				E6416FA227737DDC0033E6E9 /* UIView+Extension.swift */,
 				E6E8EB892752930C009C49C7 /* Assets.xcassets */,
@@ -421,6 +427,7 @@
 				E686C09A280F1A9500B4EB0D /* ContentFactory.swift in Sources */,
 				E6E8EBB32757D8BB009C49C7 /* FeedViewController.swift in Sources */,
 				E684B49128198C2E00459049 /* TestUserService.swift in Sources */,
+				E683648129CED9D60031BD3F /* CustomButton.swift in Sources */,
 				E686C097280F1A9500B4EB0D /* PostTableViewCell.swift in Sources */,
 				E6416FA327737DDC0033E6E9 /* UIView+Extension.swift in Sources */,
 				E686C09C280F1BD000B4EB0D /* AppDelegate.swift in Sources */,
@@ -430,6 +437,7 @@
 				E686C094280F1A9500B4EB0D /* PhotosCollectionViewCell.swift in Sources */,
 				E686C098280F1A9500B4EB0D /* LogInViewController.swift in Sources */,
 				E686C092280F1A9500B4EB0D /* ProfileTableHeaderView.swift in Sources */,
+				E69D1FEB29EBEE1B0064F6A5 /* FeedModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
