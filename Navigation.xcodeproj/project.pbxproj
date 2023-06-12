@@ -14,7 +14,6 @@
 		E663B14029BB267F005D6105 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E663B13F29BB267F005D6105 /* LoginInspector.swift */; };
 		E67E691828087084000C50D8 /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = E67E691728087084000C50D8 /* StorageService.docc */; };
 		E67E692628087084000C50D8 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = E67E691628087084000C50D8 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E67E692928087084000C50D8 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67E691428087084000C50D8 /* StorageService.framework */; platformFilter = ios; };
 		E67E692A28087084000C50D8 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E67E691428087084000C50D8 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E67E693228087116000C50D8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E8EBB627592EDB009C49C7 /* Post.swift */; };
 		E67E6934280879D3000C50D8 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E67E691428087084000C50D8 /* StorageService.framework */; };
@@ -124,7 +123,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E67E6934280879D3000C50D8 /* StorageService.framework in Frameworks */,
-				E67E692928087084000C50D8 /* StorageService.framework in Frameworks */,
 				FD3F3B68FEA0947D6693428C /* Pods_Navigation.framework in Frameworks */,
 				E684113A280C2F2700C98418 /* iOSIntPackage in Frameworks */,
 			);

@@ -9,21 +9,29 @@ import UIKit
 
 final class CustomButton: UIButton {
     
+    typealias Action = () -> Void
+
     private var title: String?
     private var сolorOfBackground: UIColor?
-    var tapAction: (() -> Void)?
+    var tapAction: Action?
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    init(title: String?, сolorOfBackground: UIColor?) {
-        super.init(frame: .zero)
+    init(title: String?, сolorOfBackground: UIColor?, action: @escaping Action) {
         
+        tapAction = action
+
+        super.init(frame: .zero)
+
         setTitle(title, for: .normal)
         backgroundColor = сolorOfBackground
-        
         setupButton()
+
+        addTarget(self, action: #selector(tapped), for: .touchUpInside)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -38,7 +46,6 @@ final class CustomButton: UIButton {
         layer.shadowRadius      = 4
         layer.shadowColor       = UIColor.black.cgColor
         layer.shadowOpacity     = 0.7
-        addTarget(self, action: #selector(tapped), for: .touchUpInside)
         
         toAutoLayout()
     }

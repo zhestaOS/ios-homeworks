@@ -90,11 +90,14 @@ final class ProfileTableHeaderView: UIView {
         
         return textField
     }()
-    
-    private let setStatusButton = CustomButton(
-        title: "Set status",
-        сolorOfBackground: .systemBlue
-    )
+
+    private lazy var setStatusButton: CustomButton = {
+        let button = CustomButton(title: "Set status",
+                                  сolorOfBackground: .systemBlue) {
+            self.setStatusButtonTapped()
+        }
+        return button
+    }()
 
     // MARK: - Life cycle
     
@@ -113,10 +116,6 @@ final class ProfileTableHeaderView: UIView {
         bringSubviewToFront(closeButton)
         
         backgroundColor = .systemGray6
-        
-        setStatusButton.tapAction = {
-            self.setStatusButtonTapped()
-        }
     }
     
     required init?(coder: NSCoder) {

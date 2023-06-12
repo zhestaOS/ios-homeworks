@@ -96,10 +96,13 @@ final class LogInViewController: UIViewController {
     private let imgForNormalState = UIImage(named: "blue_pixel")?.alpha(1.0)
     private let imgForOtherState = UIImage(named: "blue_pixel")?.alpha(0.8)
     
-    private let logInButton = CustomButton(
-        title: "Log In",
-        сolorOfBackground: .systemGreen
-    )
+    private lazy var logInButton: CustomButton = {
+        let button = CustomButton(title: "Log In",
+                                  сolorOfBackground: .systemGreen) {
+            self.logInButtonTapped()
+        }
+        return button
+    }()
     
     // MARK: - Life cycle
     
@@ -124,10 +127,6 @@ final class LogInViewController: UIViewController {
         
         addSubviews()
         setConstraints()
-        
-        logInButton.tapAction = {
-            self.logInButtonTapped()
-        }
         
     }
     

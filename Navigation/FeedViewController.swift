@@ -22,21 +22,30 @@ final class FeedViewController: UIViewController {
         
         return stackView
     }()
-    
-    private let firstButton = CustomButton(
-        title: "First button",
-        сolorOfBackground: .systemGreen
-    )
-    
-    private let secondButton = CustomButton(
-        title: "Second button",
-        сolorOfBackground: .systemTeal
-    )
-    
-    private let checkGuessButton = CustomButton(
-        title: "Check guess",
-        сolorOfBackground: .systemOrange
-    )
+
+    private lazy var firstButton: CustomButton = {
+        let button = CustomButton(title: "First button",
+                                  сolorOfBackground: .systemGreen) {
+            self.transitionButtonTapped()
+        }
+        return button
+    }()
+
+    private lazy var secondButton: CustomButton = {
+        let button = CustomButton(title: "Second button",
+                                  сolorOfBackground: .systemTeal) {
+            self.transitionButtonTapped()
+        }
+        return button
+    }()
+
+    private lazy var checkGuessButton: CustomButton = {
+        let button = CustomButton(title: "Check guess",
+                                  сolorOfBackground: .systemOrange) {
+            self.checkGuessButtonTapped()
+        }
+        return button
+    }()
     
     private var guessText: String?
     
@@ -73,16 +82,6 @@ final class FeedViewController: UIViewController {
         view.backgroundColor = .white
         addSubviews()
         setConstraints()
-        
-        firstButton.tapAction = {
-            self.transitionButtonTapped()
-        }
-        secondButton.tapAction = {
-            self.transitionButtonTapped()
-        }
-        checkGuessButton.tapAction = {
-            self.checkGuessButtonTapped()
-        }
     }
     
     // MARK: - Methods
