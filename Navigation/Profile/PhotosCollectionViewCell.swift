@@ -57,7 +57,7 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
     }
 }
 
-// MARK: - Extension
+// MARK: - Extension: ReusableView
 
 extension PhotosCollectionViewCell: ReusableView {
     static var identifier: String {

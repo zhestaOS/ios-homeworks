@@ -93,25 +93,13 @@ final class LogInViewController: UIViewController {
         return textField
     }()
     
-    private let logInButton: UIButton = {
-        let button = UIButton()
-        let imgForNormalState = UIImage(named: "blue_pixel")?.alpha(1.0)
-        let imgForOtherState = UIImage(named: "blue_pixel")?.alpha(0.8)
-
-        button.setTitle("Log In", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16)
-        button.titleLabel?.textColor = .white
-        button.setBackgroundImage(imgForNormalState, for: .normal)
-        button.setBackgroundImage(imgForOtherState, for: .selected)
-        button.setBackgroundImage(imgForOtherState, for: .highlighted)
-        button.setBackgroundImage(imgForOtherState, for: .disabled)
-        button.layer.cornerRadius = 10.0
-        button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(logInButtonTapped), for: .touchUpInside)
-        button.toAutoLayout()
-        
-        return button
-    }()
+    private let imgForNormalState = UIImage(named: "blue_pixel")?.alpha(1.0)
+    private let imgForOtherState = UIImage(named: "blue_pixel")?.alpha(0.8)
+    
+    private let logInButton = CustomButton(
+        title: "Log In",
+        сolorOfBackground: .systemGreen
+    )
     
     // MARK: - Life cycle
     
@@ -129,8 +117,17 @@ final class LogInViewController: UIViewController {
         
         navigationController?.navigationBar.isHidden = true
         
+        logInButton.setBackgroundImage(imgForNormalState, for: .normal)
+        logInButton.setBackgroundImage(imgForOtherState, for: .selected)
+        logInButton.setBackgroundImage(imgForOtherState, for: .highlighted)
+        logInButton.setBackgroundImage(imgForOtherState, for: .disabled)
+        
         addSubviews()
         setConstraints()
+        
+        logInButton.tapAction = {
+            self.logInButtonTapped()
+        }
         
     }
     

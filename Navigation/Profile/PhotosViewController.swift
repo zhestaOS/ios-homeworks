@@ -12,16 +12,16 @@ final class PhotosViewController: UIViewController {
     
     // MARK: - Properties
     
+    enum Constants {
+        static let spacing: CGFloat = 8
+        static let screenWidth = UIScreen.main.bounds.width
+    }
+    
     private var photos = [UIImage]()
     
     private let contentFactory = ContentFactory()
     
     private let imagePublisher = ImagePublisherFacade()
-    
-    enum Constants {
-        static let spacing: CGFloat = 8
-        static let screenWidth = UIScreen.main.bounds.width
-    }
 
     private let collectionView: UICollectionView = {
         let viewLayout = UICollectionViewFlowLayout()
@@ -97,7 +97,7 @@ final class PhotosViewController: UIViewController {
     
 }
 
-// MARK: - Extensions
+// MARK: - Extension: UICollectionViewDataSource
 
 extension PhotosViewController: UICollectionViewDataSource {
    
@@ -114,6 +114,8 @@ extension PhotosViewController: UICollectionViewDataSource {
         return cell
     }
 }
+
+// MARK: - Extension: UICollectionViewDelegateFlowLayout
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -146,12 +148,12 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 
 }
 
+// MARK: - Extension: ImageLibrarySubscriber
+
 extension PhotosViewController: ImageLibrarySubscriber {
     func receive(images: [UIImage]) {
         photos = images
         collectionView.reloadData()
     }
-    
-    
     
 }

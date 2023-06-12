@@ -91,21 +91,11 @@ final class ProfileTableHeaderView: UIView {
         return textField
     }()
     
-    private let setStatusButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Set status", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.titleLabel?.textColor = .white
-        button.layer.cornerRadius = 14
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
-        button.addTarget(self, action: #selector(setStatusButtonTapped), for: .touchUpInside)
-        
-        return button
-    }()
-    
+    private let setStatusButton = CustomButton(
+        title: "Set status",
+        сolorOfBackground: .systemBlue
+    )
+
     // MARK: - Life cycle
     
     override init(frame: CGRect) {
@@ -123,6 +113,10 @@ final class ProfileTableHeaderView: UIView {
         bringSubviewToFront(closeButton)
         
         backgroundColor = .systemGray6
+        
+        setStatusButton.tapAction = {
+            self.setStatusButtonTapped()
+        }
     }
     
     required init?(coder: NSCoder) {
