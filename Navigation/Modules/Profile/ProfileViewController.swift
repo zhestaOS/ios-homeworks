@@ -12,7 +12,7 @@ final class ProfileViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let user: User
+    private let viewModel: ProfileViewModelProtocol
     
     private var posts = [Post]()
     
@@ -30,9 +30,9 @@ final class ProfileViewController: UIViewController {
     }()
     
     // MARK: - Life cycle
-
-    init(user: User) {
-        self.user = user
+    
+    init(viewModel: ProfileViewModelProtocol) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -45,7 +45,7 @@ final class ProfileViewController: UIViewController {
         
         header.isUserInteractionEnabled = true
         
-        header.update(user: user)
+        header.update(user: viewModel.user)
                 
         #if DEBUG
         header.backgroundColor = .systemOrange
