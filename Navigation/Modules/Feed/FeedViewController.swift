@@ -11,8 +11,8 @@ final class FeedViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let feedModel = FeedModel.shared
-        
+    private let viewModel: FeedViewModelProtocol
+            
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -76,7 +76,16 @@ final class FeedViewController: UIViewController {
     
     
     // MARK: - Life cycle
-
+    
+    init(viewModel: FeedViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -136,7 +145,7 @@ final class FeedViewController: UIViewController {
     
     @objc
     func checkGuessButtonTapped() {
-        if feedModel.check(word: guessText) {
+        if viewModel.checkWord(word: guessText) {
             checkGuessLabel.text = "Right!"
             checkGuessLabel.textColor = .green
         } else {

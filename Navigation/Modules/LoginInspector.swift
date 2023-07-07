@@ -13,4 +13,5 @@ struct LoginInspector: LoginViewControllerDelegate {
         let checker = Checker.shared.check(login: login, password: password)
         return checker
     }
+    
 }

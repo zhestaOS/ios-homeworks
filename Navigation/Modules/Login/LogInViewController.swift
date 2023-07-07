@@ -15,7 +15,7 @@ final class LogInViewController: UIViewController {
     
     // MARK: - Properties
     
-    var loginDelegate: LoginViewControllerDelegate?
+    let viewModel: LoginViewModelProtocol
         
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -106,8 +106,19 @@ final class LogInViewController: UIViewController {
     
     // MARK: - Life cycle
     
+    init(viewModel: LoginViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .white
         
         frameGuide = scrollView.frameLayoutGuide
         contentGuide = scrollView.contentLayoutGuide
@@ -131,6 +142,17 @@ final class LogInViewController: UIViewController {
     }
     
     // MARK: - Methods
+    
+    private func bindViewModel() {
+        viewModel.onStateDidChange = { [weak self] state in
+            switch state {
+            case .error:
+                self?.showLoginError()
+            case .initial:
+                break
+            }
+        }
+    }
     
     private func addSubviews() {
         view.addSubview(scrollView)
@@ -211,26 +233,8 @@ final class LogInViewController: UIViewController {
     
     @objc
     private func logInButtonTapped() {
-        
         guard let username = loginTextField.text, let password = passwordTextField.text else { return }
-        
-        var userService: UserService
-        
-//        #if DEBUG
-//        userService = TestUserService()
-//        #else
-        userService = CurrentUserService()
-//        #endif
-        
-        guard let loginDelegate = loginDelegate, loginDelegate.check(login: username, password: password) else {
-            showLoginError()
-            return
-        }
-
-        guard let user = userService.returnUser(username: username) else { return }
-        
-        let vc = ProfileViewController(user: user)
-        navigationController?.pushViewController(vc, animated: true)
+        viewModel.updateState(viewInput: .loginButtonTapped(authData: .init(login: username, password: password)))
     }
     
     @objc
