@@ -20,8 +20,8 @@ final class PhotosViewController: UIViewController {
     private var photos = [UIImage]()
     
     private let contentFactory = ContentFactory()
-    
-    private let imagePublisher = ImagePublisherFacade()
+        
+    private let imageProcessor = ImageProcessor()
 
     private let collectionView: UICollectionView = {
         let viewLayout = UICollectionViewFlowLayout()
@@ -43,22 +43,41 @@ final class PhotosViewController: UIViewController {
         setupViews()
         setConstraints()
         
-        imagePublisher.subscribe(self)
-        imagePublisher.addImagesWithTimer(
-            time: 0.5,
-            repeat: 20,
-            userImages: contentFactory.photos()
-        )
+        let startDate = Date.timeIntervalSinceReferenceDate
+        print("Start time --- \(Date.timeIntervalSinceReferenceDate)")
+        imageProcessor.processImagesOnThread(sourceImages: contentFactory.photos(), filter: .colorInvert, qos: .utility) { [weak self] cgImages in
+            var result = [UIImage]()
+            for cgImage in cgImages {
+                guard let cgImage = cgImage else {
+                    continue
+                }
+                result.append(UIImage(cgImage: cgImage))
+            }
+            self?.photos = result
+            DispatchQueue.main.async {
+                let endDate = Date.timeIntervalSinceReferenceDate
+                print("End time --- \(Date.timeIntervalSinceReferenceDate)")
+                print("Result === \(endDate - startDate)")
+                self?.collectionView.reloadData()
+            }
+        }
+        
+        /*
+         
+         Different QOS time:
+         
+             .default = 1.1380870342254639
+             .background = 1.9977110624313354
+             .userInitiated = 1.1708459854125977
+             .userInteractive = 1.1332459449768066
+             .utility = 1.1831660270690918
+         
+         */
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        imagePublisher.removeSubscription(for: self)
     }
     
     // MARK: - Methods
@@ -146,14 +165,4 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         Constants.spacing
     }
 
-}
-
-// MARK: - Extension: ImageLibrarySubscriber
-
-extension PhotosViewController: ImageLibrarySubscriber {
-    func receive(images: [UIImage]) {
-        photos = images
-        collectionView.reloadData()
-    }
-    
 }
