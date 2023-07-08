@@ -74,6 +74,8 @@ final class FeedViewController: UIViewController {
         return label
     }()
     
+    private var timer: Timer?
+    
     
     // MARK: - Life cycle
     
@@ -91,6 +93,15 @@ final class FeedViewController: UIViewController {
         view.backgroundColor = .white
         addSubviews()
         setConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupTimer()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        timer?.invalidate()
     }
     
     // MARK: - Methods
@@ -157,5 +168,16 @@ final class FeedViewController: UIViewController {
     @objc
     func guessChecked(_ textField: UITextField) {
         guessText = textField.text
+    }
+    
+    private func setupTimer() {
+        let timeInterval: Double = 60 * 15
+        timer = Timer(timeInterval: timeInterval, repeats: true, block: { timer in
+            print("fired")
+            let alertController = UIAlertController(title: "Предепреждение", message: "Желательно давать глазам отдыхать каждые 15 минут.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+            self.present(alertController, animated: true)
+        })
+        RunLoop.main.add(timer!, forMode: .default)
     }
 }
