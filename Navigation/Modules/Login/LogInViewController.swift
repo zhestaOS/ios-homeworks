@@ -16,6 +16,8 @@ final class LogInViewController: UIViewController {
     // MARK: - Properties
     
     let viewModel: LoginViewModelProtocol
+    
+    private let bruteForceHelper = BrutForceHelper()
         
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -104,6 +106,19 @@ final class LogInViewController: UIViewController {
         return button
     }()
     
+    private lazy var bruteForceButton: CustomButton = {
+        let button = CustomButton(title: "Подобрать пароль",
+                                  сolorOfBackground: .systemRed) {
+            self.bruteForceButtonTapped()
+        }
+        return button
+    }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        return indicator
+    }()
+    
     // MARK: - Life cycle
     
     init(viewModel: LoginViewModelProtocol) {
@@ -161,7 +176,8 @@ final class LogInViewController: UIViewController {
             vkLogoImageView,
             loginTextField,
             passwordTextField,
-            logInButton
+            logInButton,
+            bruteForceButton
         )
     }
     
@@ -197,8 +213,13 @@ final class LogInViewController: UIViewController {
             logInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            logInButton.heightAnchor.constraint(equalToConstant: 50)
+            logInButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            bruteForceButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 16),
+            bruteForceButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            bruteForceButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            bruteForceButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            bruteForceButton.heightAnchor.constraint(equalToConstant: 50)
             
         ])
     }
@@ -240,6 +261,38 @@ final class LogInViewController: UIViewController {
     @objc
     func tapGesture(_ gesture: UITapGestureRecognizer) {
         print("Did catch tap action")
+    }
+    
+    @objc
+    func bruteForceButtonTapped() {
+        passwordTextField.rightView = activityIndicator
+        activityIndicator.startAnimating()
+        passwordTextField.rightViewMode = .always
+        
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let result = self?.bruteForce()
+            
+            DispatchQueue.main.async {
+                self?.passwordTextField.text = result
+                self?.passwordTextField.isSecureTextEntry = false
+                self?.activityIndicator.stopAnimating()
+            }
+        }
+    }
+    
+    private func bruteForce() -> String {
+        let randomPassword = bruteForceHelper.randomString(length: 3)
+        
+        let ALLOWED_CHARACTERS: [String] = String().digitsAndLetters.map { String($0) }
+
+        var password: String = ""
+
+        while password != randomPassword {
+            password = bruteForceHelper.generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
+            print(password)
+        }
+        
+        return password
     }
     
     private func showLoginError() {

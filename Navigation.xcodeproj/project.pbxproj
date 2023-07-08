@@ -40,6 +40,7 @@
 		E686C09C280F1BD000B4EB0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686C09B280F1BD000B4EB0D /* AppDelegate.swift */; };
 		E6888C5A2A4EADB00027A605 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6888C592A4EADB00027A605 /* LoginViewModel.swift */; };
 		E69D1FEB29EBEE1B0064F6A5 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69D1FEA29EBEE1B0064F6A5 /* FeedModel.swift */; };
+		E6DAFB1F2A5947C70059AA85 /* BrutForceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAFB1E2A5947C70059AA85 /* BrutForceHelper.swift */; };
 		E6E8EB8127529309009C49C7 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		E6E8EB8A2752930C009C49C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6E8EB892752930C009C49C7 /* Assets.xcassets */; };
 		E6E8EB8D2752930C009C49C7 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -117,6 +118,7 @@
 		E686C09B280F1BD000B4EB0D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6888C592A4EADB00027A605 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E69D1FEA29EBEE1B0064F6A5 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
+		E6DAFB1E2A5947C70059AA85 /* BrutForceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrutForceHelper.swift; sourceTree = "<group>"; };
 		E6E8EB7D27529309009C49C7 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E8EB892752930C009C49C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6E8EB8E2752930C009C49C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				E663B13F29BB267F005D6105 /* LoginInspector.swift */,
 				E6E8EBB42757E28A009C49C7 /* PostViewController.swift */,
 				E686C08E280F1A9500B4EB0D /* PostTableViewCell.swift */,
+				E6DAFB1E2A5947C70059AA85 /* BrutForceHelper.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6DAFB1F2A5947C70059AA85 /* BrutForceHelper.swift in Sources */,
 				E6FAD675281868B4007B4AD5 /* CurrentUserService.swift in Sources */,
 				E60D7CEE282D5A5B002ED913 /* Checker.swift in Sources */,
 				E65876642A3766DD007B69F4 /* Coordinatable.swift in Sources */,
