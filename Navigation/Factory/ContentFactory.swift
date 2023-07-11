@@ -13,6 +13,10 @@ protocol LoginFactoryProtocol {
     func makeLoginInspector() -> LoginInspector
 }
 
+enum ContentFactoryError: Error {
+    case notFound
+}
+
 final class ContentFactory: LoginFactoryProtocol {
     
     // MARK: - Properties
@@ -51,8 +55,9 @@ final class ContentFactory: LoginFactoryProtocol {
     
     // MARK: - Methods
     
-    func posts() -> [Post] {
-        [post1, post2, post3, post4]
+    func posts() -> Result<[Post], ContentFactoryError> {
+        .success([post1, post2, post3, post4])
+//        .failure(.notFound)
     }
 
     func photos() -> [UIImage] {

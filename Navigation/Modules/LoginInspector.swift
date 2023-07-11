@@ -7,11 +7,24 @@
 
 import Foundation
 
-struct LoginInspector: LoginViewControllerDelegate {
+enum AuthError: Error {
+case userNotFound, incorrectPassword
+}
 
-    func check(login: String, password: String) -> Bool {
-        let checker = Checker.shared.check(login: login, password: password)
-        return checker
+struct LoginInspector: LoginViewControllerDelegate {
+    
+    func check(login: String, password: String) throws -> Bool {
+        let isLoginValid = Checker.shared.checkLogin(login)
+        guard isLoginValid else {
+            throw AuthError.userNotFound
+        }
+        
+        let isPasswordValid = Checker.shared.checkPassword(password)
+        guard isPasswordValid else {
+            throw AuthError.incorrectPassword
+        }
+        
+        return true
     }
     
 }

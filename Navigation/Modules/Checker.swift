@@ -26,6 +26,14 @@ final class Checker {
         login == self.login && password == self.password
     }
     
+    func checkLogin(_ login: String) -> Bool {
+        login == self.login
+    }
+    
+    func checkPassword(_ password: String) -> Bool {
+        password == self.password
+    }
+    
     func predefinedLogin() -> String {
         login
     }
