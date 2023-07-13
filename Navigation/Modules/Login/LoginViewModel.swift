@@ -20,7 +20,8 @@ final class LoginViewModel: LoginViewModelProtocol {
     
     enum State {
         case initial
-        case error
+        case errorLogin
+        case errorPassword
     }
     
     enum ViewInput {
@@ -49,13 +50,29 @@ final class LoginViewModel: LoginViewModelProtocol {
     func updateState(viewInput: ViewInput) {
         switch viewInput {
         case .loginButtonTapped(let authData):
-            let isValidUser = loginDelegate.check(login: authData.login, password: authData.password)
+            var isValidUser = false
+            do {
+                isValidUser = try loginDelegate.check(login: authData.login, password: authData.password)
+            } catch {
+                if let error  = error as? AuthError {
+                    handleError(error)
+                }
+            }
+            
             guard isValidUser, let user = userService.returnUser(username: authData.login) else {
-//                showLoginError()
-                state = .error
+                state = .errorLogin
                 return
             }
             coordinator?.pushProfileViewController(for: user)
+        }
+    }
+    
+    func handleError(_ error: AuthError) {
+        switch error {
+        case .userNotFound:
+            state = .errorLogin
+        case .incorrectPassword:
+            state = .errorPassword
         }
     }
 }

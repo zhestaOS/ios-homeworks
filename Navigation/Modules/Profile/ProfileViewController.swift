@@ -56,8 +56,16 @@ final class ProfileViewController: UIViewController {
         addSubviews()
         setupViews()
         setConstraints()
-                
-        posts = contentFactory.posts()
+                        
+        let result = contentFactory.posts()
+        switch result {
+        case .success(let success):
+            posts = success
+        case .failure(let error):
+            let alertController = UIAlertController(title: "", message: "Что то пошло не так, повторите попытку", preferredStyle: .alert)
+            alertController.addAction(.init(title: "OK", style: .cancel))
+            present(alertController, animated: true)
+        }
         
         tableView.reloadData()
      

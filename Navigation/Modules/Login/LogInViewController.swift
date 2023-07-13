@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LoginViewControllerDelegate {
-    func check(login: String, password: String) -> Bool
+    func check(login: String, password: String) throws -> Bool
 }
 
 final class LogInViewController: UIViewController {
@@ -118,6 +118,8 @@ final class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bindViewModel()
+        
         view.backgroundColor = .white
         
         frameGuide = scrollView.frameLayoutGuide
@@ -146,8 +148,10 @@ final class LogInViewController: UIViewController {
     private func bindViewModel() {
         viewModel.onStateDidChange = { [weak self] state in
             switch state {
-            case .error:
+            case .errorLogin:
                 self?.showLoginError()
+            case .errorPassword:
+                self?.showPasswordError()
             case .initial:
                 break
             }
@@ -243,8 +247,16 @@ final class LogInViewController: UIViewController {
     }
     
     private func showLoginError() {
-        let alertController = UIAlertController(title: "", message: "Введены некорректные данные, попробуйте еще раз", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Попробовать", style: .cancel)
+        showError(with: "Введен неправильный логин")
+    }
+    
+    private func showPasswordError() {
+        showError(with: "Введен неправильный пароль")
+    }
+    
+    private func showError(with message: String) {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Повторить", style: .cancel)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
     }
