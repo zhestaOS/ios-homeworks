@@ -40,6 +40,7 @@
 		E686C09C280F1BD000B4EB0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686C09B280F1BD000B4EB0D /* AppDelegate.swift */; };
 		E6888C5A2A4EADB00027A605 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6888C592A4EADB00027A605 /* LoginViewModel.swift */; };
 		E69D1FEB29EBEE1B0064F6A5 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69D1FEA29EBEE1B0064F6A5 /* FeedModel.swift */; };
+		E6A894152A6BD2750019FFF6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A894142A6BD2750019FFF6 /* NetworkManager.swift */; };
 		E6E8EB8127529309009C49C7 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		E6E8EB8A2752930C009C49C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6E8EB892752930C009C49C7 /* Assets.xcassets */; };
 		E6E8EB8D2752930C009C49C7 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -117,6 +118,7 @@
 		E686C09B280F1BD000B4EB0D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6888C592A4EADB00027A605 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E69D1FEA29EBEE1B0064F6A5 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
+		E6A894142A6BD2750019FFF6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E6E8EB7D27529309009C49C7 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E8EB892752930C009C49C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6E8EB8E2752930C009C49C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				E66E4F322A4DDE2E006C566F /* TabBar */,
 				E6E8EB892752930C009C49C7 /* Assets.xcassets */,
 				E6E8EB8E2752930C009C49C7 /* Info.plist */,
+				E6A894142A6BD2750019FFF6 /* NetworkManager.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				E686C09A280F1A9500B4EB0D /* ContentFactory.swift in Sources */,
 				E6E8EBB32757D8BB009C49C7 /* FeedViewController.swift in Sources */,
 				E684B49128198C2E00459049 /* TestUserService.swift in Sources */,
+				E6A894152A6BD2750019FFF6 /* NetworkManager.swift in Sources */,
 				E65876662A449778007B69F4 /* AppCoordinator.swift in Sources */,
 				E683648129CED9D60031BD3F /* CustomButton.swift in Sources */,
 				E686C097280F1A9500B4EB0D /* PostTableViewCell.swift in Sources */,
