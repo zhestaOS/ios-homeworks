@@ -18,9 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appFactory = AppFactory()
         let appCoordinator = AppCoordinator(factory: appFactory)
         
+        let appConfiguration: AppConfiguration = .people(URL(string: "https://swapi.dev/api/people/8")!)
+        
         self.appCoordinator = appCoordinator
         window?.rootViewController = appCoordinator.start()
         window?.makeKeyAndVisible()
+        
+        NetworkManager.request(for: appConfiguration)
         
         return true
     }
