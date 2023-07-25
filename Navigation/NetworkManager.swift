@@ -65,9 +65,8 @@ struct NetworkManager {
                     return
                 }
                 
-                print(name)
-                print("ALL HEADER FIELDS:", httpResponse.allHeaderFields, "STATUS CODE:", httpResponse.statusCode)
-//                ErrorDomain Code=-1009 "The Internet connection appears to be offline."
+//                print(name)
+//                print("ALL HEADER FIELDS:", httpResponse.allHeaderFields, "STATUS CODE:", httpResponse.statusCode)
                 
             } catch {
                 print(error)

@@ -11,31 +11,65 @@ final class InfoViewController: UIViewController {
     
     // MARK: - Properties
     
-    let buttonWidth: CGFloat = 200
-    let buttonHeight: CGFloat = 44
+    private lazy var toDoTextLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont(name: "AvenirNext-Bold", size: 18)
+        label.toAutoLayout()
+        
+        return label
+    }()
+    
+    private lazy var alertButton: CustomButton = {
+        let button = CustomButton(title: "Предупреждение",
+                                  сolorOfBackground: .systemGreen) {
+            self.alertButtonTapped()
+        }
+        return button
+    }()
     
     // MARK: - Life cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let x: CGFloat = (view.bounds.width / 2) - (buttonWidth / 2)
-        let y: CGFloat = (view.bounds.height / 2) - (buttonHeight / 2)
-        
-        let buttonFrame = CGRect(x: x, y: y, width: buttonWidth, height: buttonHeight)
-        let alertButton = UIButton(frame: buttonFrame)
-        alertButton.backgroundColor = .systemTeal
-        alertButton.setTitle("Предупреждение", for: .normal)
-        alertButton.setTitleColor(.white, for: .normal)
-        alertButton.addTarget(self, action: #selector(alertButtonTapped), for: .touchUpInside)
-        
-        view.addSubview(alertButton)
-        
         view.backgroundColor = .white
-
+        
+        addSubviews()
+        setConstraints()
+        
+        toDo { toDoText, errorText in
+            DispatchQueue.main.async {
+                if let errorText {
+                    print(errorText)
+                    self.toDoTextLabel.text = "Something went wrong"
+                } else if let toDoText {
+                    self.toDoTextLabel.text = toDoText
+                }
+            }
+        }
     }
     
     // MARK: - Methods
+    
+    
+    private func addSubviews() {
+        view.addSubview(alertButton)
+        view.addSubview(toDoTextLabel)
+    }
+    
+    private func setConstraints() {
+        
+        NSLayoutConstraint.activate([
+            toDoTextLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            toDoTextLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            alertButton.topAnchor.constraint(equalTo: toDoTextLabel.bottomAnchor, constant: 16),
+            alertButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            alertButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            alertButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
     
     @objc
     func alertButtonTapped() {
