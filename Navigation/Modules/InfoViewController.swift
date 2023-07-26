@@ -11,6 +11,24 @@ final class InfoViewController: UIViewController {
     
     // MARK: - Properties
     
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = 10
+        stackView.toAutoLayout()
+        
+        return stackView
+    }()
+    
+    private lazy var alertButton: CustomButton = {
+        let button = CustomButton(title: "Предупреждение",
+                                  сolorOfBackground: .systemGreen) {
+            self.alertButtonTapped()
+        }
+        return button
+    }()
+    
     private lazy var toDoTextLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -20,12 +38,13 @@ final class InfoViewController: UIViewController {
         return label
     }()
     
-    private lazy var alertButton: CustomButton = {
-        let button = CustomButton(title: "Предупреждение",
-                                  сolorOfBackground: .systemGreen) {
-            self.alertButtonTapped()
-        }
-        return button
+    private lazy var planetOrbitalPeriodLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .blue
+        label.font = UIFont(name: "AvenirNext-Bold", size: 18)
+        label.toAutoLayout()
+        
+        return label
     }()
     
     // MARK: - Life cycle
@@ -37,6 +56,17 @@ final class InfoViewController: UIViewController {
         
         addSubviews()
         setConstraints()
+        
+        getPlanetInfo { orbitalPeriod, errorText in
+            DispatchQueue.main.async {
+                if let errorText {
+                    print(errorText)
+                    self.planetOrbitalPeriodLabel.text = "Something went wrong"
+                } else if let orbitalPeriod {
+                    self.planetOrbitalPeriodLabel.text = orbitalPeriod
+                }
+            }
+        }
         
         toDo { toDoText, errorText in
             DispatchQueue.main.async {
@@ -52,22 +82,34 @@ final class InfoViewController: UIViewController {
     
     // MARK: - Methods
     
-    
     private func addSubviews() {
-        view.addSubview(alertButton)
-        view.addSubview(toDoTextLabel)
+        view.addSubviews(
+            stackView,
+            alertButton,
+            toDoTextLabel,
+            planetOrbitalPeriodLabel
+        )
+        
+        stackView.addArrangedSubview(alertButton)
+        stackView.addArrangedSubview(toDoTextLabel)
+        stackView.addArrangedSubview(planetOrbitalPeriodLabel)
+        
     }
     
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
-            toDoTextLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            toDoTextLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
             
-            alertButton.topAnchor.constraint(equalTo: toDoTextLabel.bottomAnchor, constant: 16),
             alertButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             alertButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            alertButton.heightAnchor.constraint(equalToConstant: 50)
+            alertButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            toDoTextLabel.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
+            toDoTextLabel.heightAnchor.constraint(equalToConstant: 25),
+            
+            planetOrbitalPeriodLabel.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
+            planetOrbitalPeriodLabel.heightAnchor.constraint(equalToConstant: 25)
         ])
     }
     
