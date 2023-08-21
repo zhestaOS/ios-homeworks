@@ -13,15 +13,20 @@ protocol LoginViewModelProtocol: ViewModelProtocol {
 }
 
 final class LoginViewModel: LoginViewModelProtocol {
+    
+    // MARK: - Properties
+    
     struct UserAuthData {
-        let login: String
+        let email: String
         let password: String
     }
     
     enum State {
         case initial
-        case errorLogin
+        case errorEmail
         case errorPassword
+        case emptyFields
+        case unexpectedError(desc: String)
     }
     
     enum ViewInput {
@@ -39,6 +44,8 @@ final class LoginViewModel: LoginViewModelProtocol {
         }
     }
     
+    // MARK: - Life cycle
+    
     init(
         userService: UserService = CurrentUserService(),
         contentFactory: LoginViewControllerDelegate = ContentFactory().makeLoginInspector()
@@ -47,32 +54,38 @@ final class LoginViewModel: LoginViewModelProtocol {
         self.loginDelegate = contentFactory
     }
     
+    // MARK: - Methods
+    
     func updateState(viewInput: ViewInput) {
         switch viewInput {
         case .loginButtonTapped(let authData):
-            var isValidUser = false
-            do {
-                isValidUser = try loginDelegate.check(login: authData.login, password: authData.password)
-            } catch {
-                if let error  = error as? AuthError {
-                    handleError(error)
+            loginDelegate.check(email: authData.email, password: authData.password) { [weak self] result in
+                switch result {
+                case .success(let email):
+                    guard let user = self?.userService.returnUser(username: email) else {
+                        self?.handleError(.incorrectEmail)
+                        return
+                    }
+                    self?.coordinator?.pushProfileViewController(for: user)
+                case .failure(let error):
+                    self?.handleError(error)
                 }
             }
-            
-            guard isValidUser, let user = userService.returnUser(username: authData.login) else {
-                state = .errorLogin
-                return
-            }
-            coordinator?.pushProfileViewController(for: user)
         }
     }
     
     func handleError(_ error: AuthError) {
         switch error {
-        case .userNotFound:
-            state = .errorLogin
+        case .incorrectEmail:
+            state = .errorEmail
         case .incorrectPassword:
             state = .errorPassword
+        case .fbRegEmailAlreadyInUse(let desc), .fbRegInvalidEmail(let desc), .fbRegWeakPassword(let desc), .fbRegUnexpected(let desc),
+                .fbAuthInvalidCredential(let desc), .fbAuthInvalidEmail(let desc), .fbAuthWrongPassword(let desc), .fbAuthUnexpected(let desc):
+            state = .unexpectedError(desc: desc)
+        case .emptyFields:
+            state = .emptyFields
         }
     }
 }
+

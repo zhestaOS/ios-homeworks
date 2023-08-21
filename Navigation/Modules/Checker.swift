@@ -13,7 +13,7 @@ final class Checker {
     
     static let shared = Checker()
     
-    private let login = "Vera"
+    private let email = "vera@mail.ru"
     private let password = "123"
     
     // MARK: - Life cycle
@@ -22,20 +22,20 @@ final class Checker {
     
     // MARK: - Methods
     
-    func check(login: String, password: String) -> Bool {
-        login == self.login && password == self.password
+    func check(email: String, password: String) -> Bool {
+        email == self.email && password == self.password
     }
     
-    func checkLogin(_ login: String) -> Bool {
-        login == self.login
+    func checkEmail(_ email: String) -> Bool {
+        email == self.email
     }
     
     func checkPassword(_ password: String) -> Bool {
         password == self.password
     }
     
-    func predefinedLogin() -> String {
-        login
+    func predefinedEmail() -> String {
+        email
     }
     
     func predefinedPassword() -> String {

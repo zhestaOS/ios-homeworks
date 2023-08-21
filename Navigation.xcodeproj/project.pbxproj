@@ -39,6 +39,9 @@
 		E686C09C280F1BD000B4EB0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686C09B280F1BD000B4EB0D /* AppDelegate.swift */; };
 		E6888C5A2A4EADB00027A605 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6888C592A4EADB00027A605 /* LoginViewModel.swift */; };
 		E69D1FEB29EBEE1B0064F6A5 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69D1FEA29EBEE1B0064F6A5 /* FeedModel.swift */; };
+		E6A8484C2A8A3463006C553D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E6A8484B2A8A3462006C553D /* GoogleService-Info.plist */; };
+		E6A8484E2A8A4504006C553D /* CheckerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A8484D2A8A4504006C553D /* CheckerService.swift */; };
+		E6A848502A8A48B1006C553D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A8484F2A8A48B0006C553D /* Alert.swift */; };
 		E6A894152A6BD2750019FFF6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A894142A6BD2750019FFF6 /* NetworkManager.swift */; };
 		E6A894602A6FA8340019FFF6 /* Pods_StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 314BBFE4E6539C72EF917BFC /* Pods_StorageService.framework */; };
 		E6A894642A6FABF60019FFF6 /* JSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A894632A6FABF60019FFF6 /* JSONModel.swift */; };
@@ -119,6 +122,9 @@
 		E686C09B280F1BD000B4EB0D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6888C592A4EADB00027A605 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E69D1FEA29EBEE1B0064F6A5 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
+		E6A8484B2A8A3462006C553D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E6A8484D2A8A4504006C553D /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
+		E6A8484F2A8A48B0006C553D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		E6A894142A6BD2750019FFF6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E6A894632A6FABF60019FFF6 /* JSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModel.swift; sourceTree = "<group>"; };
 		E6E8EB7D27529309009C49C7 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,8 +186,8 @@
 		E65876592A371CEC007B69F4 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				E6888C582A4EAD9C0027A605 /* Login */,
 				E66E4F2E2A4C9637006C566F /* Module.swift */,
+				E6888C582A4EAD9C0027A605 /* Login */,
 				E686C088280F1A9500B4EB0D /* Profile */,
 				E658765E2A371DE5007B69F4 /* Feed */,
 				E6E8EBB8275938A1009C49C7 /* InfoViewController.swift */,
@@ -193,7 +199,7 @@
 				E683648029CED9D60031BD3F /* CustomButton.swift */,
 				E6FAD672281860DE007B4AD5 /* User.swift */,
 				E60D7CED282D5A5B002ED913 /* Checker.swift */,
-				E663B13F29BB267F005D6105 /* LoginInspector.swift */,
+				E6A8484F2A8A48B0006C553D /* Alert.swift */,
 				E6E8EBB42757E28A009C49C7 /* PostViewController.swift */,
 				E686C08E280F1A9500B4EB0D /* PostTableViewCell.swift */,
 			);
@@ -278,6 +284,8 @@
 			children = (
 				E686C08F280F1A9500B4EB0D /* LogInViewController.swift */,
 				E6888C592A4EADB00027A605 /* LoginViewModel.swift */,
+				E6A8484D2A8A4504006C553D /* CheckerService.swift */,
+				E663B13F29BB267F005D6105 /* LoginInspector.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -313,6 +321,7 @@
 				E66E4F322A4DDE2E006C566F /* TabBar */,
 				E6E8EB892752930C009C49C7 /* Assets.xcassets */,
 				E6E8EB8E2752930C009C49C7 /* Info.plist */,
+				E6A8484B2A8A3462006C553D /* GoogleService-Info.plist */,
 				E6A894142A6BD2750019FFF6 /* NetworkManager.swift */,
 				E6A894632A6FABF60019FFF6 /* JSONModel.swift */,
 			);
@@ -431,6 +440,7 @@
 			files = (
 				E6E8EB8D2752930C009C49C7 /* (null) in Resources */,
 				E6E8EB8A2752930C009C49C7 /* Assets.xcassets in Resources */,
+				E6A8484C2A8A3463006C553D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,12 +542,14 @@
 				E6A894642A6FABF60019FFF6 /* JSONModel.swift in Sources */,
 				E6A894152A6BD2750019FFF6 /* NetworkManager.swift in Sources */,
 				E65876662A449778007B69F4 /* AppCoordinator.swift in Sources */,
+				E6A848502A8A48B1006C553D /* Alert.swift in Sources */,
 				E683648129CED9D60031BD3F /* CustomButton.swift in Sources */,
 				E686C097280F1A9500B4EB0D /* PostTableViewCell.swift in Sources */,
 				E6416FA327737DDC0033E6E9 /* UIView+Extension.swift in Sources */,
 				E66E4F2F2A4C9637006C566F /* Module.swift in Sources */,
 				E6888C5A2A4EADB00027A605 /* LoginViewModel.swift in Sources */,
 				E686C09C280F1BD000B4EB0D /* AppDelegate.swift in Sources */,
+				E6A8484E2A8A4504006C553D /* CheckerService.swift in Sources */,
 				E6E8EBB9275938A1009C49C7 /* InfoViewController.swift in Sources */,
 				E623F5B227C533CA008E1943 /* UIImage+Extension.swift in Sources */,
 				E6E8EBB52757E28A009C49C7 /* PostViewController.swift in Sources */,
