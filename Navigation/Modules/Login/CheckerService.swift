@@ -104,10 +104,9 @@ class CheckerService: CheckerServiceProtocol {
                 }
                 return
             }
+            
             if let email = authDataResult?.user.email {
                 completion(.success(email))
-            } else {
-                completion(.failure(.fbAuthUnexpected(desc: "Unexpected error")))
             }
         }
     }
