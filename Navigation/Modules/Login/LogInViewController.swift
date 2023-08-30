@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import FirebaseAuth
 
-protocol LoginViewControllerDelegate {
-    func check(login: String, password: String) throws -> Bool
+protocol LoginViewControllerDelegate: AnyObject {
+    func check(email: String, password: String, completion: @escaping (Result<String, AuthError>) -> Void)
 }
 
 final class LogInViewController: UIViewController {
@@ -16,7 +17,7 @@ final class LogInViewController: UIViewController {
     // MARK: - Properties
     
     let viewModel: LoginViewModelProtocol
-        
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = true
@@ -46,13 +47,10 @@ final class LogInViewController: UIViewController {
         return imageView
     }()
     
-    private let loginTextField: UITextField = {
+    private let emailTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Username"
-        
-        textField.text = Checker.shared.predefinedLogin()
-        
+        textField.placeholder = "Email"
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.tintColor = UIColor.red
@@ -73,9 +71,6 @@ final class LogInViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
         textField.placeholder = "Password"
-        
-        textField.text = Checker.shared.predefinedPassword()
-        
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.tintColor = UIColor.red
@@ -147,23 +142,30 @@ final class LogInViewController: UIViewController {
     
     private func bindViewModel() {
         viewModel.onStateDidChange = { [weak self] state in
+            guard let self else {
+                return
+            }
             switch state {
-            case .errorLogin:
-                self?.showLoginError()
+            case .errorEmail:
+                Alert.shared.showError(with: "Email введен некорректно", vc: self)
             case .errorPassword:
-                self?.showPasswordError()
+                Alert.shared.showError(with: "Пароль введен некорректно, длина пароля не должна быть менее 6 символов", vc: self)
+            case .unexpectedError(desc: let desc):
+                Alert.shared.showError(with: desc, vc: self)
+            case .emptyFields:
+                Alert.shared.showError(with: "Введите e-mail и пароль", vc: self)
             case .initial:
                 break
             }
         }
     }
-    
+  
     private func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubviews(
             vkLogoImageView,
-            loginTextField,
+            emailTextField,
             passwordTextField,
             logInButton
         )
@@ -188,12 +190,12 @@ final class LogInViewController: UIViewController {
             vkLogoImageView.widthAnchor.constraint(equalToConstant: 100),
             vkLogoImageView.heightAnchor.constraint(equalToConstant: 100),
             
-            loginTextField.topAnchor.constraint(equalTo: vkLogoImageView.bottomAnchor, constant: 120),
-            loginTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            loginTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            loginTextField.heightAnchor.constraint(equalToConstant: 50),
+            emailTextField.topAnchor.constraint(equalTo: vkLogoImageView.bottomAnchor, constant: 120),
+            emailTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            emailTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            emailTextField.heightAnchor.constraint(equalToConstant: 50),
             
-            passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor),
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             passwordTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
@@ -237,28 +239,12 @@ final class LogInViewController: UIViewController {
     
     @objc
     private func logInButtonTapped() {
-        guard let username = loginTextField.text, let password = passwordTextField.text else { return }
-        viewModel.updateState(viewInput: .loginButtonTapped(authData: .init(login: username, password: password)))
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        viewModel.updateState(viewInput: .loginButtonTapped(authData: .init(email: email, password: password)))
     }
     
     @objc
     func tapGesture(_ gesture: UITapGestureRecognizer) {
         print("Did catch tap action")
     }
-    
-    private func showLoginError() {
-        showError(with: "Введен неправильный логин")
-    }
-    
-    private func showPasswordError() {
-        showError(with: "Введен неправильный пароль")
-    }
-    
-    private func showError(with message: String) {
-        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Повторить", style: .cancel)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true)
-    }
-    
 }

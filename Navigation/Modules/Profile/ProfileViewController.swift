@@ -62,9 +62,8 @@ final class ProfileViewController: UIViewController {
         case .success(let success):
             posts = success
         case .failure(let error):
-            let alertController = UIAlertController(title: "", message: "Что то пошло не так, повторите попытку", preferredStyle: .alert)
-            alertController.addAction(.init(title: "OK", style: .cancel))
-            present(alertController, animated: true)
+            Alert.shared.showError(with: "Что то пошло не так, повторите попытку", vc: self)
+            print(error.localizedDescription)
         }
         
         tableView.reloadData()

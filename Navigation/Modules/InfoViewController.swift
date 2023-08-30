@@ -57,13 +57,13 @@ final class InfoViewController: UIViewController {
         addSubviews()
         setConstraints()
         
-        getPlanetInfo { orbitalPeriod, errorText in
+        getPlanetInfo { name, orbitalPeriod, errorText in
             DispatchQueue.main.async {
                 if let errorText {
                     print(errorText)
                     self.planetOrbitalPeriodLabel.text = "Something went wrong"
-                } else if let orbitalPeriod {
-                    self.planetOrbitalPeriodLabel.text = orbitalPeriod
+                } else if let name = name, let orbitalPeriod = orbitalPeriod {
+                    self.planetOrbitalPeriodLabel.text = "\(name) orbital period: \(orbitalPeriod)"
                 }
             }
         }

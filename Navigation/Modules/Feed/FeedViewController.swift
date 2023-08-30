@@ -60,7 +60,7 @@ final class FeedViewController: UIViewController {
         let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 14, height: 0))
         textField.leftView = leftView
         textField.leftViewMode = .always
-        textField.addTarget(self, action: #selector(guessChecked(_:)), for: .editingChanged)
+        textField.addTarget(FeedViewController.self, action: #selector(guessChecked(_:)), for: .editingChanged)
 
         return textField
     }()

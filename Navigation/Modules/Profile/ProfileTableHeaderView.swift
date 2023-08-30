@@ -32,7 +32,7 @@ final class ProfileTableHeaderView: UIView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .black
-        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        button.addTarget(ProfileTableHeaderView.self, action: #selector(closeButtonTapped), for: .touchUpInside)
         button.frame = CGRect(
             x: UIScreen.main.bounds.width - Constants.spacing - Constants.closeButtonSize,
             y: Constants.spacing,
@@ -86,7 +86,7 @@ final class ProfileTableHeaderView: UIView {
         let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 14, height: 0))
         textField.leftView = leftView
         textField.leftViewMode = .always
-        textField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
+        textField.addTarget(ProfileTableHeaderView.self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
         
         return textField
     }()
