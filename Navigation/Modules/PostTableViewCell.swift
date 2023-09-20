@@ -11,6 +11,9 @@ import iOSIntPackage
 
 final class PostTableViewCell: UITableViewCell {
     
+    var doubleTapAction: ((Post) -> Void)?
+    var post: Post!
+    
     private enum Constants {
         static let spacing: CGFloat = 16
         static let screenWidth = UIScreen.main.bounds.width
@@ -82,6 +85,10 @@ final class PostTableViewCell: UITableViewCell {
         selectionStyle = .none
         addSubviews()
         setConstraints()
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(doubleTap))
+        recognizer.numberOfTapsRequired = 2
+        contentView.addGestureRecognizer(recognizer)
     }
     
     // MARK: - Methods
@@ -132,11 +139,17 @@ final class PostTableViewCell: UITableViewCell {
     }
     
     public func update(with post: Post) {
+        self.post = post
         authorLabel.text = post.author
-        descriptionLabel.text = post.description
+        descriptionLabel.text = post.textValue
         likesLabel.text = "Likes: " + String(post.likes)
         viewsLabel.text = "Views: " + String(post.views)
         applyFilter(imageName: post.image)
+    }
+    
+    @objc
+    func doubleTap() {
+        doubleTapAction?(post)
     }
     
 }
