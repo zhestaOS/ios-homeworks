@@ -24,7 +24,7 @@ final class AppCoordinator: Coordinatable {
         let appTabBarController = AppTabBarController(viewControllers: [
             feedCoordinator.start(),
             profileCoordinator.start(),
-            favouritesController,
+            UINavigationController(rootViewController: favouritesController),
         ])
 
         addChildCoordinator(feedCoordinator)
