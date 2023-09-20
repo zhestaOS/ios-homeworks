@@ -7,25 +7,34 @@
 
 import UIKit
 import StorageService
+import CoreData
 
-class FavouritesViewController: UITableViewController {
+class FavouritesViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var posts = [Post]()
+    var fetchResultController: NSFetchedResultsController<PostDB>?
+    
     var searchValue: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "search", style: .plain, target: self, action: #selector(sesrchTapped))
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "clear", style: .plain, target: self, action: #selector(clearTapped))
+        
+        fetchResultController = setupFetchController()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        posts = CoreDataManager.shared.posts()
-        tableView.reloadData()
+    func setupFetchController() -> NSFetchedResultsController<PostDB> {
+        let fetchRequest = PostDB.fetchRequest()
+        if searchValue != nil {
+            fetchRequest.predicate = NSPredicate(format: "author CONTAINS %@", searchValue!)
+        }
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "addedAt", ascending: false)]
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataManager.shared.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+        try? frc.performFetch()
+        return frc
     }
     
     @objc
@@ -41,7 +50,8 @@ class FavouritesViewController: UITableViewController {
                 return
             }
             self?.searchValue = text
-            self?.updatePosts()
+            self?.fetchResultController = self?.setupFetchController()
+            self?.tableView.reloadData()
         }))
         self.present(alertController, animated: true, completion: nil)
     }
@@ -49,31 +59,23 @@ class FavouritesViewController: UITableViewController {
     @objc
     func clearTapped() {
         searchValue = nil
-        posts = CoreDataManager.shared.posts()
-        tableView.reloadData()
-    }
-
-    func updatePosts() {
-        guard let searchValue else {
-            return
-        }
-        posts.removeAll()
-        posts = CoreDataManager.shared.searchAuthor(author: searchValue)
+        fetchResultController = nil
+        fetchResultController = setupFetchController()
         tableView.reloadData()
     }
     
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        return fetchResultController?.sections?[section].numberOfObjects ?? 0
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath)
-
+        let post = fetchResultController?.object(at: indexPath)
         if let cell = cell as? PostTableViewCell {
-            cell.update(with: posts[indexPath.row])
+            cell.update(with: post!.convert())
         }
         return cell
     }
@@ -84,11 +86,25 @@ class FavouritesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            tableView.beginUpdates()
-            CoreDataManager.shared.delete(post: posts[indexPath.row])
-            posts.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
+            if let postDB = fetchResultController?.object(at: indexPath) {
+                CoreDataManager.shared.delete(post: postDB)
+            }
         }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        tableView.reloadData()
+    }
+}
+
+extension PostDB {
+    func convert() -> Post {
+        Post(
+            author: author ?? "",
+            image: image ?? "",
+            description: textValue ?? "",
+            likes: Int(likes),
+            views: Int(views)
+        )
     }
 }

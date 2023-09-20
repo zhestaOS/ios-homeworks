@@ -20,6 +20,7 @@ class CoreDataManager: NSObject {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
 
@@ -43,6 +44,7 @@ class CoreDataManager: NSObject {
         postDB.textValue = post.textValue
         postDB.likes = Int32(post.likes)
         postDB.views = Int32(post.views)
+        postDB.addedAt = Date()
         try? context.save()
     }
     
@@ -58,16 +60,12 @@ class CoreDataManager: NSObject {
         })
     }
     
-    func delete(post: Post) {
+    func delete(post: PostDB) {
         let backgroundContext = persistentContainer.newBackgroundContext()
-        let predicate = NSPredicate(format: "textValue == %@", post.textValue)
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "PostDB")
-        fetchRequest.predicate = predicate
-        let posts = try? backgroundContext.fetch(fetchRequest) as? [PostDB]
-        if let post = posts?.first {
-            try? backgroundContext.delete(post)
-            try? backgroundContext.save()
-        }
+        let postDB = backgroundContext.object(with: post.objectID)
+        
+        backgroundContext.delete(postDB)
+        try? backgroundContext.save()
     }
     
     func searchAuthor(author: String) -> [Post] {
