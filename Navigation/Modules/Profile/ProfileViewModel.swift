@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import StorageService
 
 protocol ProfileViewModelProtocol: ViewModelProtocol {
     var user: User { get }
+    func addPostToFavs(post: Post)
 }
 
 final class ProfileViewModel: ProfileViewModelProtocol {
@@ -16,5 +18,9 @@ final class ProfileViewModel: ProfileViewModelProtocol {
     
     init(user: User) {
         self.user = user
+    }
+    
+    func addPostToFavs(post: Post) {
+        CoreDataManager.shared.savePost(post: post)
     }
 }

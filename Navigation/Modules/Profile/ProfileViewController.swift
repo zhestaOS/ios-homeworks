@@ -126,13 +126,20 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
         if let cell = cell as? PostTableViewCell {
             cell.update(with: posts[indexPath.row])
+            cell.doubleTapAction = { [weak self] post in
+                self?.viewModel.addPostToFavs(post: post)
+            }
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextVC = PhotosViewController()
-        nextVC.update(title: "Photo Gallery")
-        navigationController?.pushViewController(nextVC, animated: true)
+        if indexPath.section == 0 {
+            let nextVC = PhotosViewController()
+            nextVC.update(title: "Photo Gallery")
+            navigationController?.pushViewController(nextVC, animated: true)
+        }
     }
+    
+    
 }
