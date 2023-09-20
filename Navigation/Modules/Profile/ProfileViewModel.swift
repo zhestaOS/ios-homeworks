@@ -10,7 +10,7 @@ import StorageService
 
 protocol ProfileViewModelProtocol: ViewModelProtocol {
     var user: User { get }
-    func addPostToFavs(post: Post)
+    func addPostToFavs(post: Post, completion: (Bool) -> Void)
 }
 
 final class ProfileViewModel: ProfileViewModelProtocol {
@@ -20,7 +20,9 @@ final class ProfileViewModel: ProfileViewModelProtocol {
         self.user = user
     }
     
-    func addPostToFavs(post: Post) {
-        CoreDataManager.shared.savePost(post: post)
+    func addPostToFavs(post: Post, completion: (Bool) -> Void) {
+        CoreDataManager.shared.savePost(post: post) { isSuccess in
+            completion(isSuccess)
+        }
     }
 }

@@ -36,8 +36,19 @@ class CoreDataManager: NSObject {
         }
     }
     
-    func savePost(post: Post) {
+    func savePost(post: Post, completion: (Bool) -> Void) {
         let context = persistentContainer.newBackgroundContext()
+        
+        let predicate = NSPredicate(format: "author == %@ AND textValue == %@", post.author, post.textValue)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "PostDB")
+        fetchRequest.predicate = predicate
+        let posts = try? context.fetch(fetchRequest) as? [PostDB]
+        if let posts = posts, posts.count > 0 {
+            completion(false)
+            return
+        }
+        
+        
         let postDB = PostDB(context: context)
         postDB.author = post.author
         postDB.image = post.image
@@ -46,6 +57,7 @@ class CoreDataManager: NSObject {
         postDB.views = Int32(post.views)
         postDB.addedAt = Date()
         try? context.save()
+        completion(true)
     }
     
     func posts() -> [Post] {
