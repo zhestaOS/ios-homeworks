@@ -36,13 +36,14 @@ class CoreDataManager: NSObject {
     }
     
     func savePost(post: Post) {
-        let postDB = PostDB(context: persistentContainer.viewContext)
+        let context = persistentContainer.newBackgroundContext()
+        let postDB = PostDB(context: context)
         postDB.author = post.author
         postDB.image = post.image
         postDB.textValue = post.textValue
         postDB.likes = Int32(post.likes)
         postDB.views = Int32(post.views)
-        saveContext()
+        try? context.save()
     }
     
     func posts() -> [Post] {
@@ -55,5 +56,38 @@ class CoreDataManager: NSObject {
                 views: Int(db.views)
             )
         })
+    }
+    
+    func delete(post: Post) {
+        let backgroundContext = persistentContainer.newBackgroundContext()
+        let predicate = NSPredicate(format: "textValue == %@", post.textValue)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "PostDB")
+        fetchRequest.predicate = predicate
+        let posts = try? backgroundContext.fetch(fetchRequest) as? [PostDB]
+        if let post = posts?.first {
+            try? backgroundContext.delete(post)
+            try? backgroundContext.save()
+        }
+    }
+    
+    func searchAuthor(author: String) -> [Post] {
+        let backgroundContext = persistentContainer.newBackgroundContext()
+        
+        let predicate = NSPredicate(format: "author CONTAINS %@", author)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "PostDB")
+        fetchRequest.predicate = predicate
+        let posts = try? backgroundContext.fetch(fetchRequest) as? [PostDB]
+        
+        guard let posts = posts else { return [] }
+        
+        return posts.map { db in
+            return Post(
+                author: db.author ?? "",
+                image: db.image ?? "",
+                description: db.textValue ?? "",
+                likes: Int(db.likes),
+                views: Int(db.views)
+            )
+        }
     }
 }
