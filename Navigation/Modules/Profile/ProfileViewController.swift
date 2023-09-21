@@ -7,6 +7,7 @@
 
 import UIKit
 import StorageService
+import ProgressHUD
 
 final class ProfileViewController: UIViewController {
     
@@ -127,7 +128,13 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         if let cell = cell as? PostTableViewCell {
             cell.update(with: posts[indexPath.row])
             cell.doubleTapAction = { [weak self] post in
-                self?.viewModel.addPostToFavs(post: post)
+                self?.viewModel.addPostToFavs(post: post, completion: { isSuccess in
+                    if isSuccess {
+                        ProgressHUD.show(icon: .added)
+                    } else {
+                        ProgressHUD.show(icon: .failed)
+                    }
+                })
             }
         }
         return cell
