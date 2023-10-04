@@ -21,10 +21,13 @@ final class AppCoordinator: Coordinatable {
         let profileCoordinator = ProfileCoordinator(moduleType: .login, factory: factory)
         let favouritesController = FavouritesViewController()
         favouritesController.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage(systemName: "star.fill"), tag: 3)
+        let mapController = MapViewController()
+        mapController.tabBarItem = UITabBarItem(title: "Map", image: UIImage(systemName: "map.fill"), tag: 4)
         let appTabBarController = AppTabBarController(viewControllers: [
             feedCoordinator.start(),
             profileCoordinator.start(),
             UINavigationController(rootViewController: favouritesController),
+            mapController,
         ])
 
         addChildCoordinator(feedCoordinator)

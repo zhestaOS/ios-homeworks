@@ -42,6 +42,7 @@
 		E686C09A280F1A9500B4EB0D /* ContentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686C091280F1A9500B4EB0D /* ContentFactory.swift */; };
 		E686C09C280F1BD000B4EB0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E686C09B280F1BD000B4EB0D /* AppDelegate.swift */; };
 		E6888C5A2A4EADB00027A605 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6888C592A4EADB00027A605 /* LoginViewModel.swift */; };
+		E69C74252ACC62F0002A66F2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69C74242ACC62F0002A66F2 /* MapViewController.swift */; };
 		E69D1FEB29EBEE1B0064F6A5 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69D1FEA29EBEE1B0064F6A5 /* FeedModel.swift */; };
 		E6A8484E2A8A4504006C553D /* CheckerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A8484D2A8A4504006C553D /* CheckerService.swift */; };
 		E6A848502A8A48B1006C553D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A8484F2A8A48B0006C553D /* Alert.swift */; };
@@ -128,6 +129,7 @@
 		E686C091280F1A9500B4EB0D /* ContentFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentFactory.swift; sourceTree = "<group>"; };
 		E686C09B280F1BD000B4EB0D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6888C592A4EADB00027A605 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		E69C74242ACC62F0002A66F2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E69D1FEA29EBEE1B0064F6A5 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		E6A8484D2A8A4504006C553D /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
 		E6A8484F2A8A48B0006C553D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				E6E8EBB42757E28A009C49C7 /* PostViewController.swift */,
 				E686C08E280F1A9500B4EB0D /* PostTableViewCell.swift */,
 				E62608142ABAF90A000D1F4A /* FavouritesViewController.swift */,
+				E69C74242ACC62F0002A66F2 /* MapViewController.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				E6A848502A8A48B1006C553D /* Alert.swift in Sources */,
 				E683648129CED9D60031BD3F /* CustomButton.swift in Sources */,
 				E686C097280F1A9500B4EB0D /* PostTableViewCell.swift in Sources */,
+				E69C74252ACC62F0002A66F2 /* MapViewController.swift in Sources */,
 				E6416FA327737DDC0033E6E9 /* UIView+Extension.swift in Sources */,
 				E66E4F2F2A4C9637006C566F /* Module.swift in Sources */,
 				E6888C5A2A4EADB00027A605 /* LoginViewModel.swift in Sources */,
