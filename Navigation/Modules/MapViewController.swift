@@ -13,20 +13,25 @@ class MapViewController: UIViewController {
     let locationManager = CLLocationManager()
     
     var currentLocation: CLLocationCoordinate2D?
+    var currentAnnotation: MKAnnotation?
+    var currentOverlay: MKOverlay?
     
     lazy var mapView: MKMapView = {
         let view = MKMapView()
         view.mapType = .standard
+        view.showsUserLocation = true
         view.toAutoLayout()
         return view
     }()
     
-    lazy var routeButton: UIButton = {
+    lazy var clearButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Маршрут", for: .normal)
-        button.backgroundColor = .systemMint
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.backgroundColor = .systemBackground
+        button.tintColor = .systemGray
         button.layer.cornerRadius = 21
-        button.addTarget(self, action: #selector(setupRoute), for: .touchUpInside)
+        button.addTarget(self, action: #selector(clearNavigation), for: .touchUpInside)
+        button.isHidden = true
         button.toAutoLayout()
         return button
     }()
@@ -45,11 +50,12 @@ class MapViewController: UIViewController {
 
         setupMap()
         setupLocation()
+        setupLongTap()
     }
     
     private func setupMap() {
         view.addSubview(mapView)
-        view.addSubview(routeButton)
+        view.addSubview(clearButton)
         view.addSubview(mapTypeSegmentedControl)
         
         NSLayoutConstraint.activate([
@@ -58,10 +64,10 @@ class MapViewController: UIViewController {
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            routeButton.heightAnchor.constraint(equalToConstant: 42),
-            routeButton.widthAnchor.constraint(equalToConstant: 120),
-            routeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            routeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -140),
+            clearButton.heightAnchor.constraint(equalToConstant: 42),
+            clearButton.widthAnchor.constraint(equalToConstant: 42),
+            clearButton.topAnchor.constraint(equalTo: mapTypeSegmentedControl.bottomAnchor, constant: 20),
+            clearButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -44),
             
             mapTypeSegmentedControl.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             mapTypeSegmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
@@ -96,16 +102,39 @@ class MapViewController: UIViewController {
     }
     
     @objc
-    private func setupRoute() {
-        guard let currentLocation = currentLocation else { return }
+    func clearNavigation() {
+        mapView.removeOverlays(mapView.overlays)
+        removePinsWitoutMy()
+        clearButton.isHidden = true
+    }
+    
+    private func setupLongTap() {
+        let recognizer = UILongPressGestureRecognizer()
+        recognizer.minimumPressDuration = 1
+        recognizer.addTarget(self, action: #selector(longTapHandled))
+        mapView.addGestureRecognizer(recognizer)
+    }
+    
+    private func removePinsWitoutMy() {
+        mapView.removeAnnotations(mapView.annotations)
+        if let currentAnnotation {
+            mapView.addAnnotation(currentAnnotation)
+        }
+    }
+    
+    @objc
+    private func longTapHandled(recognizer: UIGestureRecognizer) {
+        removePinsWitoutMy()
         
-        let destinationCoordinate = CLLocationCoordinate2D(latitude: 37.342164, longitude: -122.0257934)
+        let touchPoint = recognizer.location(in: mapView)
+        let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         let destinationPin = MKPointAnnotation()
-        destinationPin.coordinate = destinationCoordinate
+        destinationPin.coordinate = touchCoordinate
         mapView.addAnnotation(destinationPin)
         
-        let region = MKCoordinateRegion(center: currentLocation, latitudinalMeters: 2000, longitudinalMeters: 2000)
-        mapView.setRegion(region, animated: true)
+        guard let currentLocation = currentLocation else { return }
+        
+        let destinationCoordinate = touchCoordinate
         
         let sourcePlacemark = MKPlacemark(coordinate: currentLocation)
         let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate)
@@ -125,6 +154,7 @@ class MapViewController: UIViewController {
                     let route = response.routes.first else { return }
             
             self.mapView.addOverlay(route.polyline, level: .aboveRoads)
+            self.clearButton.isHidden = false
         }
     }
 }
@@ -132,6 +162,7 @@ class MapViewController: UIViewController {
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
+            currentOverlay = overlay
             let renderer = MKPolylineRenderer(overlay: overlay)
             renderer.strokeColor = .purple
             renderer.lineWidth = 3.0
@@ -155,17 +186,17 @@ extension MapViewController: CLLocationManagerDelegate {
         let region: MKCoordinateRegion = MKCoordinateRegion(center: pointLocation, span: span)
         mapView.setRegion(region, animated: true)
         
-        var pinLocation : CLLocationCoordinate2D = CLLocationCoordinate2DMake(current.latitude, current.longitude)
-        var objectAnnotation = MKPointAnnotation()
+        let pinLocation : CLLocationCoordinate2D = CLLocationCoordinate2DMake(current.latitude, current.longitude)
+        let objectAnnotation = MKPointAnnotation()
         objectAnnotation.coordinate = pinLocation
         objectAnnotation.title = "My position"
         mapView.addAnnotation(objectAnnotation)
         
         currentLocation = pinLocation
+        currentAnnotation = objectAnnotation
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
 }
-
