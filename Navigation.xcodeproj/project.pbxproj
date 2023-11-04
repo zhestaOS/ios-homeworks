@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E603A58D2A960EF1002829FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E603A58C2A960EF1002829FF /* GoogleService-Info.plist */; };
 		E60D7CEE282D5A5B002ED913 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D7CED282D5A5B002ED913 /* Checker.swift */; };
+		E620AE4D2AF6C456005A8107 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E620AE4F2AF6C456005A8107 /* Localizable.strings */; };
+		E620AE522AF6C5C9005A8107 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E620AE512AF6C5C9005A8107 /* String+Localization.swift */; };
 		E623F5B227C533CA008E1943 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E623F5B127C533CA008E1943 /* UIImage+Extension.swift */; };
 		E62608152ABAF90A000D1F4A /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62608142ABAF90A000D1F4A /* FavouritesViewController.swift */; };
 		E62608192ABAFAF6000D1F4A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E62608172ABAFAF6000D1F4A /* Model.xcdatamodeld */; };
@@ -99,6 +101,9 @@
 		6AFB901DBDD26D901ACC9D18 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
 		E603A58C2A960EF1002829FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E60D7CED282D5A5B002ED913 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		E620AE4E2AF6C456005A8107 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E620AE502AF6C458005A8107 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E620AE512AF6C5C9005A8107 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		E623F5B127C533CA008E1943 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		E62608142ABAF90A000D1F4A /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
 		E62608182ABAFAF6000D1F4A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -342,8 +347,10 @@
 				E6E8EB892752930C009C49C7 /* Assets.xcassets */,
 				E6E8EB8E2752930C009C49C7 /* Info.plist */,
 				E603A58C2A960EF1002829FF /* GoogleService-Info.plist */,
+				E620AE4F2AF6C456005A8107 /* Localizable.strings */,
 				E6A894142A6BD2750019FFF6 /* NetworkManager.swift */,
 				E6A894632A6FABF60019FFF6 /* JSONModel.swift */,
+				E620AE512AF6C5C9005A8107 /* String+Localization.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -431,6 +438,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = E6E8EB7427529309009C49C7;
 			packageReferences = (
@@ -459,6 +467,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6E8EB8D2752930C009C49C7 /* (null) in Resources */,
+				E620AE4D2AF6C456005A8107 /* Localizable.strings in Resources */,
 				E6E8EB8A2752930C009C49C7 /* Assets.xcassets in Resources */,
 				E603A58D2A960EF1002829FF /* GoogleService-Info.plist in Resources */,
 			);
@@ -568,6 +577,7 @@
 				E683648129CED9D60031BD3F /* CustomButton.swift in Sources */,
 				E686C097280F1A9500B4EB0D /* PostTableViewCell.swift in Sources */,
 				E69C74252ACC62F0002A66F2 /* MapViewController.swift in Sources */,
+				E620AE522AF6C5C9005A8107 /* String+Localization.swift in Sources */,
 				E6416FA327737DDC0033E6E9 /* UIView+Extension.swift in Sources */,
 				E66E4F2F2A4C9637006C566F /* Module.swift in Sources */,
 				E6888C5A2A4EADB00027A605 /* LoginViewModel.swift in Sources */,
@@ -602,6 +612,18 @@
 			targetProxy = E67E6935280879D3000C50D8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E620AE4F2AF6C456005A8107 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E620AE4E2AF6C456005A8107 /* en */,
+				E620AE502AF6C458005A8107 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E67E692C28087084000C50D8 /* Debug */ = {

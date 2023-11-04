@@ -142,8 +142,8 @@ final class PostTableViewCell: UITableViewCell {
         self.post = post
         authorLabel.text = post.author
         descriptionLabel.text = post.textValue
-        likesLabel.text = "Likes: " + String(post.likes)
-        viewsLabel.text = "Views: " + String(post.views)
+        likesLabel.text =  "profile_likes_label".localized(String(post.likes))
+        viewsLabel.text = "profile_views_label".localized(String(post.views))
         applyFilter(imageName: post.image)
     }
     
