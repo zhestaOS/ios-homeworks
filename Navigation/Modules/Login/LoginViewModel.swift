@@ -21,7 +21,7 @@ final class LoginViewModel: LoginViewModelProtocol {
         let password: String
     }
     
-    enum State {
+    enum State: Equatable {
         case initial
         case errorEmail
         case errorPassword
