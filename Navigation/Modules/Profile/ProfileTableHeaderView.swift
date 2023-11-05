@@ -77,8 +77,8 @@ final class ProfileTableHeaderView: UIView {
     
     private let statusTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .white
-        textField.textColor = .black
+        textField.backgroundColor = .vkBackgroundColor
+        textField.textColor = .vkTextMainColor
         textField.font = UIFont(name: "Avenir Next", size: 15)
         textField.layer.cornerRadius = 14
         textField.layer.borderColor = UIColor.black.cgColor

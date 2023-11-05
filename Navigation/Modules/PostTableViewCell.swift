@@ -25,7 +25,7 @@ final class PostTableViewCell: UITableViewCell {
 
     private let authorLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .vkTextMainColor
         label.font = UIFont(name: "AvenirNext-Bold", size: 20)
         label.numberOfLines = 2
         label.toAutoLayout()
@@ -54,7 +54,7 @@ final class PostTableViewCell: UITableViewCell {
     
     private let likesLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .vkTextMainColor
         label.font = UIFont(name: "Avenir Next", size: 16)
         label.toAutoLayout()
         
@@ -63,7 +63,7 @@ final class PostTableViewCell: UITableViewCell {
     
     private let viewsLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .vkTextMainColor
         label.font = UIFont(name: "Avenir Next", size: 16)
         label.toAutoLayout()
         
