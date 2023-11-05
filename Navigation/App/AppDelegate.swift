@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NetworkManager.request(for: appConfiguration)
         
+        LocalNotificationsService().registeForLatestUpdatesIfPossible()
+        
         return true
     }
     
