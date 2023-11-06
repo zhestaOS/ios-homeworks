@@ -43,6 +43,8 @@ final class PhotosViewController: UIViewController {
         setupViews()
         setConstraints()
         
+        view.backgroundColor = .vkBackgroundColor
+        
         let startDate = Date.timeIntervalSinceReferenceDate
         print("Start time --- \(Date.timeIntervalSinceReferenceDate)")
         imageProcessor.processImagesOnThread(sourceImages: contentFactory.photos(), filter: .colorInvert, qos: .utility) { [weak self] cgImages in

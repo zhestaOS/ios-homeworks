@@ -19,7 +19,7 @@ final class PhotosTableViewCell: UITableViewCell {
             
     private let photosLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .vkTextMainColor
         label.font = UIFont(name: "AvenirNext-Bold", size: 24)
         label.text = "profile_photos_label".localized
         label.toAutoLayout()

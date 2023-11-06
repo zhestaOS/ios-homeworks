@@ -11,6 +11,7 @@
 		E60D7CEE282D5A5B002ED913 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D7CED282D5A5B002ED913 /* Checker.swift */; };
 		E620AE4D2AF6C456005A8107 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E620AE4F2AF6C456005A8107 /* Localizable.strings */; };
 		E620AE522AF6C5C9005A8107 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E620AE512AF6C5C9005A8107 /* String+Localization.swift */; };
+		E620AE542AF763C9005A8107 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E620AE532AF763C9005A8107 /* Colors.swift */; };
 		E623F5B227C533CA008E1943 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E623F5B127C533CA008E1943 /* UIImage+Extension.swift */; };
 		E62608152ABAF90A000D1F4A /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62608142ABAF90A000D1F4A /* FavouritesViewController.swift */; };
 		E62608192ABAFAF6000D1F4A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E62608172ABAFAF6000D1F4A /* Model.xcdatamodeld */; };
@@ -104,6 +105,7 @@
 		E620AE4E2AF6C456005A8107 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E620AE502AF6C458005A8107 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E620AE512AF6C5C9005A8107 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		E620AE532AF763C9005A8107 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E623F5B127C533CA008E1943 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		E62608142ABAF90A000D1F4A /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
 		E62608182ABAFAF6000D1F4A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				E6A894142A6BD2750019FFF6 /* NetworkManager.swift */,
 				E6A894632A6FABF60019FFF6 /* JSONModel.swift */,
 				E620AE512AF6C5C9005A8107 /* String+Localization.swift */,
+				E620AE532AF763C9005A8107 /* Colors.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				E686C09C280F1BD000B4EB0D /* AppDelegate.swift in Sources */,
 				E6A8484E2A8A4504006C553D /* CheckerService.swift in Sources */,
 				E6E8EBB9275938A1009C49C7 /* InfoViewController.swift in Sources */,
+				E620AE542AF763C9005A8107 /* Colors.swift in Sources */,
 				E623F5B227C533CA008E1943 /* UIImage+Extension.swift in Sources */,
 				E6E8EBB52757E28A009C49C7 /* PostViewController.swift in Sources */,
 				E66E4F362A4DE20B006C566F /* AppFactory.swift in Sources */,

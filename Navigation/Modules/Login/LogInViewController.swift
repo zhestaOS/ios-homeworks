@@ -51,7 +51,7 @@ final class LogInViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
         textField.placeholder = "login_email_placeholder".localized
-        textField.textColor = .black
+        textField.textColor = .vkTextMainColor
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.tintColor = UIColor.red
         textField.autocapitalizationType = .none
@@ -71,7 +71,7 @@ final class LogInViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
         textField.placeholder = "login_password_placeholder".localized
-        textField.textColor = .black
+        textField.textColor = .vkTextMainColor
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.tintColor = UIColor.red
         textField.autocapitalizationType = .none
@@ -136,6 +136,9 @@ final class LogInViewController: UIViewController {
         addSubviews()
         setConstraints()
         
+        view.backgroundColor = .vkBackgroundColor
+        scrollView.backgroundColor = .vkBackgroundColor
+        contentView.backgroundColor = .vkBackgroundColor
     }
     
     // MARK: - Methods
