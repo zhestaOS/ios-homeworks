@@ -51,7 +51,7 @@ class CoreDataManager: NSObject {
         
         let postDB = PostDB(context: context)
         postDB.author = post.author
-        postDB.image = post.image
+        postDB.image = post.imageName
         postDB.textValue = post.textValue
         postDB.likes = Int32(post.likes)
         postDB.views = Int32(post.views)
@@ -64,7 +64,8 @@ class CoreDataManager: NSObject {
         return try! persistentContainer.viewContext.fetch(PostDB.fetchRequest()).map({ db in
             Post(
                 author: db.author ?? "",
-                image: db.image ?? "",
+                image: UIImage(named: db.image ?? ""),
+                imageName: db.image ?? "",
                 description: db.textValue ?? "",
                 likes: Int(db.likes),
                 views: Int(db.views)
@@ -93,7 +94,8 @@ class CoreDataManager: NSObject {
         return posts.map { db in
             return Post(
                 author: db.author ?? "",
-                image: db.image ?? "",
+                image: UIImage(named: db.image ?? ""),
+                imageName: db.image ?? "",
                 description: db.textValue ?? "",
                 likes: Int(db.likes),
                 views: Int(db.views)

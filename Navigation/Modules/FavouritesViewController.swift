@@ -101,7 +101,8 @@ extension PostDB {
     func convert() -> Post {
         Post(
             author: author ?? "",
-            image: image ?? "",
+            image: UIImage(named: image ?? ""),
+            imageName: image ?? "",
             description: textValue ?? "",
             likes: Int(likes),
             views: Int(views)
