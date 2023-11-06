@@ -129,8 +129,8 @@ final class PostTableViewCell: UITableViewCell {
         ])
     }
     
-    private func applyFilter(imageName: String) {
-        guard let image = UIImage(named: imageName), let filter = ColorFilter.allCases.randomElement() else {
+    private func applyFilter(image: UIImage) {
+        guard let filter = ColorFilter.allCases.randomElement() else {
             return
         }
         imageProcessor.processImage(sourceImage: image, filter: filter) { image in
@@ -144,7 +144,9 @@ final class PostTableViewCell: UITableViewCell {
         descriptionLabel.text = post.textValue
         likesLabel.text =  "profile_likes_label".localized(String(post.likes))
         viewsLabel.text = "profile_views_label".localized(String(post.views))
-        applyFilter(imageName: post.image)
+        if let image = post.image {
+            applyFilter(image: image)
+        }
     }
     
     @objc

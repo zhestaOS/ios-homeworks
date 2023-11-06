@@ -8,6 +8,7 @@
 import UIKit
 import StorageService
 import ProgressHUD
+import MobileCoreServices
 
 final class ProfileViewController: UIViewController {
     
@@ -26,6 +27,10 @@ final class ProfileViewController: UIViewController {
         table.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
         table.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
         table.toAutoLayout()
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            table.dragInteractionEnabled = true
+        }
         
         return table
     }()
@@ -68,6 +73,11 @@ final class ProfileViewController: UIViewController {
         }
         
         tableView.reloadData()
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            tableView.dragDelegate = self
+            tableView.dropDelegate = self
+        }
      
     }
     
@@ -149,4 +159,89 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     
+}
+
+extension ProfileViewController: UITableViewDragDelegate {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let post = posts[indexPath.row]
+        let stringData = post.textValue.data(using: .utf8)
+        
+        let stringItemProvider = NSItemProvider()
+        stringItemProvider.registerDataRepresentation(forTypeIdentifier: kUTTypePlainText as String, visibility: .all) { completion in
+            completion(stringData, nil)
+            return nil
+        }
+        
+        var result = [UIDragItem(itemProvider:stringItemProvider)]
+        
+        
+        if let image = post.image {
+            let imageItemProvider = NSItemProvider(object: image)
+            let dragItem = UIDragItem(itemProvider:imageItemProvider)
+            dragItem.localObject = image
+            
+            result.append(dragItem)
+        }
+        
+
+        return result
+    }
+}
+
+extension ProfileViewController: UITableViewDropDelegate {
+    
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+        true
+    }
+    
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        var dropProposal = UITableViewDropProposal(operation: .cancel)
+        guard session.items.count == 1 else { return dropProposal }
+        
+        if tableView.hasActiveDrag {
+            if tableView.isEditing {
+                dropProposal = UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+            }
+        } else {
+            dropProposal = UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
+        }
+
+        return dropProposal
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        let coordinatorIndexPath = coordinator.destinationIndexPath
+        let destinationIndexPath = IndexPath(item: coordinatorIndexPath?.row ?? 0, section: 1)
+        
+        for item in coordinator.items {
+            var cachedImage: UIImage?
+            var cachedString: String?
+            
+            item.dragItem.itemProvider.loadObject(ofClass: UIImage.self) { provider, error in
+                DispatchQueue.main.async {
+                    if let image = provider as? UIImage {
+                        cachedImage = image
+                    }
+                }
+            }
+            item.dragItem.itemProvider.loadObject(ofClass: NSString.self) { provider, error in
+                DispatchQueue.main.async {
+                    if let text = provider as? String {
+                        cachedString = text
+                    }
+                    let post = Post(
+                        author: "Drag&Drop",
+                        image: cachedImage,
+                        imageName: "",
+                        description: cachedString ?? "",
+                        likes: 0,
+                        views: 0
+                    )
+                    self.posts.insert(post, at: destinationIndexPath.row)
+                    self.tableView.insertRows(at: [destinationIndexPath], with: .automatic)
+                }
+                
+            }
+        }
+    }
 }

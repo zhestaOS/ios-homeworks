@@ -23,7 +23,8 @@ final class ContentFactory: LoginFactoryProtocol {
     
     let post1 = Post(
         author: "lingva.ru",
-        image: "mountains",
+        image: UIImage(named: "mountains"),
+        imageName: "mountains",
         description: "Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана.",
         likes: 243,
         views: 365
@@ -31,7 +32,8 @@ final class ContentFactory: LoginFactoryProtocol {
 
     let post2 = Post(
         author: "Иоганн Вольфганг Гёте",
-        image: "goethe",
+        image: UIImage(named: "goethe"),
+        imageName: "goethe",
         description: "Душа моя озарена неземной радостью, как эти чудесные весенние утра, которыми я наслаждаюсь от всего сердца. Я совсем один и блаженствую в здешнем краю, словно созданном для таких, как я.",
         likes: 276,
         views: 470
@@ -39,7 +41,8 @@ final class ContentFactory: LoginFactoryProtocol {
 
     let post3 = Post(
         author: "Франц Кафка",
-        image: "kafka",
+        image: UIImage(named: "kafka"),
+        imageName: "kafka",
         description: "Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое.",
         likes: 132,
         views: 265
@@ -47,7 +50,8 @@ final class ContentFactory: LoginFactoryProtocol {
 
     let post4 = Post(
         author: "Александр Дюма",
-        image: "dumas",
+        image: UIImage(named: "dumas"),
+        imageName: "dumas",
         description: "Посмотрите, — сказал аббат, — на солнечный луч, проникающий в мое окно, и на эти линии, вычерченные мною на стене. По этим линиям я определяю время вернее, чем если бы у меня были часы, потому что часы могут испортиться, а солнце и земля всегда работают исправно.",
         likes: 344,
         views: 368
