@@ -1,0 +1,43 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Евгения Шевякова on 04.11.2023.
+  
+*/
+
+"feed_first_button" = "Первая кнопка";
+"feed_second_button" = "Вторая кнопка";
+"feed_check_guess_button" = "Проверить гостей";
+"feed_result_info_label" = "Результат будет здесь";
+"feed_result_info_label_right" = "Верно!";
+"feed_result_info_label_wrong" = "Не верно";
+
+"alert_relax_eye_title" = "Предепреждение";
+"alert_relax_eye_message" = "Желательно давать глазам отдыхать каждые 15 минут.";
+
+"login_email_placeholder" = "Почта";
+"login_password_placeholder" = "Пароль";
+"login_enter_button" = "Войти";
+
+"alert_incorrect_email" = "Email введен некорректно";
+"alert_incorrect_password" = "Пароль введен некорректно, длина пароля не должна быть менее 6 символов";
+"alert_incorrect_clear" = "Введите e-mail и пароль";
+
+"profile_photos_label" = "Фото";
+"profile_set_status_button" = "Установить статус";
+"profile_likes_label" = "Лайки: %@";
+"profile_views_label" = "Просмотры: %@";
+
+"favs_search_button" = "Поиск";
+"favs_clear_button" = "Очистить";
+"favs_search_enter_author_label" = "Введите автора";
+"favs_search_enter_author_placeholder" = "Автор...";
+
+"cancel" = "Отмена";
+"search" = "Поиск";
+
+"map_type_standart" = "Стандартная";
+"map_type_satelite" = "Спутник";
+"map_type_hybrid" = "Гибрид";
+"map_pin_annotation" = "Моё местоположение";

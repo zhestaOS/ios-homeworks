@@ -24,7 +24,7 @@ final class FeedViewController: UIViewController {
     }()
 
     private lazy var firstButton: CustomButton = {
-        let button = CustomButton(title: "First button",
+        let button = CustomButton(title: "feed_first_button".localized,
                                   сolorOfBackground: .systemGreen) {
             self.transitionButtonTapped()
         }
@@ -32,7 +32,7 @@ final class FeedViewController: UIViewController {
     }()
 
     private lazy var secondButton: CustomButton = {
-        let button = CustomButton(title: "Second button",
+        let button = CustomButton(title: "feed_second_button".localized,
                                   сolorOfBackground: .systemTeal) {
             self.transitionButtonTapped()
         }
@@ -40,7 +40,7 @@ final class FeedViewController: UIViewController {
     }()
 
     private lazy var checkGuessButton: CustomButton = {
-        let button = CustomButton(title: "Check guess",
+        let button = CustomButton(title: "feed_check_guess_button".localized,
                                   сolorOfBackground: .systemOrange) {
             self.checkGuessButtonTapped()
         }
@@ -67,7 +67,7 @@ final class FeedViewController: UIViewController {
     
     private let checkGuessLabel: UILabel = {
         let label = UILabel()
-        label.text = "The result will be here"
+        label.text = "feed_result_info_label".localized
         label.textColor = .black
         label.font = UIFont(name: "AvenirNext-Bold", size: 18)
         

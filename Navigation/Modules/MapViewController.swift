@@ -37,7 +37,7 @@ class MapViewController: UIViewController {
     }()
     
     lazy var mapTypeSegmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["Стандартная", "Спутник", "Гибрид"])
+        let control = UISegmentedControl(items: ["map_type_standart".localized, "map_type_satelite".localized, "map_type_hybrid".localized])
         control.selectedSegmentIndex = 0
         control.addTarget(self, action: #selector(switchMapType), for: .valueChanged)
         control.backgroundColor = .systemBackground
@@ -189,7 +189,7 @@ extension MapViewController: CLLocationManagerDelegate {
         let pinLocation : CLLocationCoordinate2D = CLLocationCoordinate2DMake(current.latitude, current.longitude)
         let objectAnnotation = MKPointAnnotation()
         objectAnnotation.coordinate = pinLocation
-        objectAnnotation.title = "My position"
+        objectAnnotation.title = "map_pin_annotation".localized
         mapView.addAnnotation(objectAnnotation)
         
         currentLocation = pinLocation

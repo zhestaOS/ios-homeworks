@@ -19,8 +19,8 @@ class FavouritesViewController: UITableViewController, NSFetchedResultsControlle
         super.viewDidLoad()
         
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostTableViewCell")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "search", style: .plain, target: self, action: #selector(sesrchTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "clear", style: .plain, target: self, action: #selector(clearTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "favs_search_button".localized, style: .plain, target: self, action: #selector(sesrchTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "favs_clear_button".localized, style: .plain, target: self, action: #selector(clearTapped))
         
         fetchResultController = setupFetchController()
     }
@@ -39,12 +39,12 @@ class FavouritesViewController: UITableViewController, NSFetchedResultsControlle
     
     @objc
     func sesrchTapped() {
-        let alertController = UIAlertController(title: "Enter author", message: "", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "favs_search_enter_author_label".localized, message: "", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: {(textField : UITextField!) -> Void in
-            textField.placeholder = "Search author..."
+            textField.placeholder = "favs_search_enter_author_placeholder".localized
         })
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Search", style: .default, handler: { [weak self] alert -> Void in
+        alertController.addAction(UIAlertAction(title: "cancel".localized, style: .default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "search".localized, style: .default, handler: { [weak self] alert -> Void in
             let textField = alertController.textFields![0] as UITextField
             guard let text = textField.text, !text.isEmpty else {
                 return

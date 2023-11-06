@@ -92,7 +92,7 @@ final class ProfileTableHeaderView: UIView {
     }()
 
     private lazy var setStatusButton: CustomButton = {
-        let button = CustomButton(title: "Set status",
+        let button = CustomButton(title: "profile_set_status_button".localized,
                                   сolorOfBackground: .systemBlue) {
             self.setStatusButtonTapped()
         }

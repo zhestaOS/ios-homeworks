@@ -1,0 +1,43 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Евгения Шевякова on 04.11.2023.
+  
+*/
+
+"feed_first_button" = "First button";
+"feed_second_button" = "Second button";
+"feed_check_guess_button" = "Check guess";
+"feed_result_info_label" = "The result will be here";
+"feed_result_info_label_right" = "Right!";
+"feed_result_info_label_wrong" = "Wrong";
+
+"alert_relax_eye_title" = "Attention";
+"alert_relax_eye_message" = "Relax your eyes every 15 minuts.";
+
+"login_email_placeholder" = "Email";
+"login_password_placeholder" = "Password";
+"login_enter_button" = "Log In";
+
+"alert_incorrect_email" = "Email is incorrect";
+"alert_incorrect_password" = "Password is incorrect. Please enter 6 or more symbols";
+"alert_incorrect_clear" = "Enter email and password.";
+
+"profile_photos_label" = "Photos";
+"profile_set_status_button" = "Set status";
+"profile_likes_label" = "Likes: %@";
+"profile_views_label" = "Views: %@";
+
+"favs_search_button" = "Search";
+"favs_clear_button" = "Clear";
+"favs_search_enter_author_label" = "Enter author";
+"favs_search_enter_author_placeholder" = "Search author...";
+
+"cancel" = "Cancel";
+"search" = "Search";
+
+"map_type_standart" = "Standart";
+"map_type_satelite" = "Satelite";
+"map_type_hybrid" = "Hybrid";
+"map_pin_annotation" = "My position";

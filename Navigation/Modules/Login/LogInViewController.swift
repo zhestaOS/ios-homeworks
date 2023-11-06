@@ -50,7 +50,7 @@ final class LogInViewController: UIViewController {
     private let emailTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Email"
+        textField.placeholder = "login_email_placeholder".localized
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.tintColor = UIColor.red
@@ -70,7 +70,7 @@ final class LogInViewController: UIViewController {
     private let passwordTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Password"
+        textField.placeholder = "login_password_placeholder".localized
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.tintColor = UIColor.red
@@ -92,7 +92,7 @@ final class LogInViewController: UIViewController {
     private let imgForOtherState = UIImage(named: "blue_pixel")?.alpha(0.8)
     
     private lazy var logInButton: CustomButton = {
-        let button = CustomButton(title: "Log In",
+        let button = CustomButton(title: "login_enter_button".localized,
                                   сolorOfBackground: .systemGreen) {
             self.logInButtonTapped()
         }
@@ -147,13 +147,13 @@ final class LogInViewController: UIViewController {
             }
             switch state {
             case .errorEmail:
-                Alert.shared.showError(with: "Email введен некорректно", vc: self)
+                Alert.shared.showError(with: "alert_incorrect_email".localized, vc: self)
             case .errorPassword:
-                Alert.shared.showError(with: "Пароль введен некорректно, длина пароля не должна быть менее 6 символов", vc: self)
+                Alert.shared.showError(with: "alert_incorrect_password".localized, vc: self)
             case .unexpectedError(desc: let desc):
                 Alert.shared.showError(with: desc, vc: self)
             case .emptyFields:
-                Alert.shared.showError(with: "Введите e-mail и пароль", vc: self)
+                Alert.shared.showError(with: "alert_incorrect_clear".localized, vc: self)
             case .initial:
                 break
             }
