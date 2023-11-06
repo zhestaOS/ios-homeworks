@@ -268,8 +268,10 @@ final class LogInViewController: UIViewController {
     
     @objc
     func biometryTapped() {
-        LocalAuthorizationService().authorizeIfPossible { success in
-            print(success)
+        LocalAuthorizationService().authorizeIfPossible { [weak self] success in
+            if success {
+                self?.viewModel.updateState(viewInput: .loginButtonTapped(authData: .init(email: "321@321.com", password: "321321")))
+            }
         }
     }
 }
