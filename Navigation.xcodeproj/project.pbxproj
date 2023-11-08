@@ -15,6 +15,7 @@
 		E620AE652AF772AF005A8107 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E620AE642AF772AF005A8107 /* LoginViewModelTests.swift */; };
 		E620AE672AF772C3005A8107 /* FeedViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E620AE662AF772C3005A8107 /* FeedViewModelTests.swift */; };
 		E620AE692AF7876A005A8107 /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E620AE682AF7876A005A8107 /* LocalNotificationsService.swift */; };
+		E620AE6B2AF79078005A8107 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E620AE6A2AF79078005A8107 /* LocalAuthorizationService.swift */; };
 		E623F5B227C533CA008E1943 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E623F5B127C533CA008E1943 /* UIImage+Extension.swift */; };
 		E62608152ABAF90A000D1F4A /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62608142ABAF90A000D1F4A /* FavouritesViewController.swift */; };
 		E62608192ABAFAF6000D1F4A /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E62608172ABAFAF6000D1F4A /* Model.xcdatamodeld */; };
@@ -120,6 +121,7 @@
 		E620AE642AF772AF005A8107 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		E620AE662AF772C3005A8107 /* FeedViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModelTests.swift; sourceTree = "<group>"; };
 		E620AE682AF7876A005A8107 /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
+		E620AE6A2AF79078005A8107 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		E623F5B127C533CA008E1943 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		E62608142ABAF90A000D1F4A /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
 		E62608182ABAFAF6000D1F4A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				E62608142ABAF90A000D1F4A /* FavouritesViewController.swift */,
 				E69C74242ACC62F0002A66F2 /* MapViewController.swift */,
 				E620AE682AF7876A005A8107 /* LocalNotificationsService.swift */,
+				E620AE6A2AF79078005A8107 /* LocalAuthorizationService.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 				E686C099280F1A9500B4EB0D /* ProfileViewController.swift in Sources */,
 				E6FAD673281860DE007B4AD5 /* User.swift in Sources */,
 				E66E4F342A4DDE4A006C566F /* AppTabBarController.swift in Sources */,
+				E620AE6B2AF79078005A8107 /* LocalAuthorizationService.swift in Sources */,
 				E663B14029BB267F005D6105 /* LoginInspector.swift in Sources */,
 				E686C09A280F1A9500B4EB0D /* ContentFactory.swift in Sources */,
 				E620AE692AF7876A005A8107 /* LocalNotificationsService.swift in Sources */,
@@ -941,6 +945,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Navigation;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = FaceID;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To show user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -971,6 +977,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Navigation;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = FaceID;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To show user location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

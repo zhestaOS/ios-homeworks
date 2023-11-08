@@ -99,6 +99,14 @@ final class LogInViewController: UIViewController {
         return button
     }()
     
+    lazy var biometryButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "touchid"), for: .normal)
+        button.addTarget(self, action: #selector(biometryTapped), for: .touchUpInside)
+        button.toAutoLayout()
+        return button
+    }()
+    
     // MARK: - Life cycle
     
     init(viewModel: LoginViewModelProtocol) {
@@ -170,7 +178,8 @@ final class LogInViewController: UIViewController {
             vkLogoImageView,
             emailTextField,
             passwordTextField,
-            logInButton
+            logInButton,
+            biometryButton
         )
     }
     
@@ -206,8 +215,14 @@ final class LogInViewController: UIViewController {
             logInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
             logInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            logInButton.heightAnchor.constraint(equalToConstant: 50)
+//            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            logInButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            biometryButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 16),
+            biometryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            biometryButton.heightAnchor.constraint(equalToConstant: 66),
+            biometryButton.widthAnchor.constraint(equalToConstant: 66),
+            biometryButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             
         ])
     }
@@ -249,5 +264,14 @@ final class LogInViewController: UIViewController {
     @objc
     func tapGesture(_ gesture: UITapGestureRecognizer) {
         print("Did catch tap action")
+    }
+    
+    @objc
+    func biometryTapped() {
+        LocalAuthorizationService().authorizeIfPossible { [weak self] success in
+            if success {
+                self?.viewModel.updateState(viewInput: .loginButtonTapped(authData: .init(email: "321@321.com", password: "321321")))
+            }
+        }
     }
 }
